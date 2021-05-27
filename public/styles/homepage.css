@@ -1,0 +1,21 @@
+body {
+    background: linear-gradient(#EEC0C6, #7EE8FA);
+}
+
+#sidenav {
+    width: 350px;
+}
+
+#categories:hover {
+    cursor: pointer;
+}
+
+li {
+    list-style: none;
+}
+
+.circle-icon {
+    background-color: rgb(236, 233, 233);
+    border-color: rgb(194, 192, 192);
+    width: 1.7rem;
+}

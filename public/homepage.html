@@ -1,10 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Forum</title>
-</head>
-<body>
+<html>
 
+<head>
+    <title>Forum</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@1.3.0/dist/css/axentix.min.css">
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.9.55/css/materialdesignicons.min.css" />
+    <link rel="stylesheet" href="styles/homepage.css">
+</head>
+
+<body class="layout with-sidenav">
+    <header>
+        <nav class="navbar white">
+            <a href="#" target="_blank" class="navbar-brand">Forum</a>
+            <div class="navbar-menu ml-auto">
+                <a class="navbar-link" href="#">Link 1</a>
+                <a class="navbar-link" href="#">Link 2</a>
+                <a class="navbar-link" href="#">Link 3</a>
+                <a class="navbar-link" href="#">Link 4</a>
+            </div>
+        </nav>
+
+        <div class="ml-5 mt-5 pt-1">
+            <p id="path">Forum/ Technology/ Computer/ <span class="font-w700">Latest</span></p>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="grix xs3 m-5 pl-2 pr-2">
+            <div id="sidenav" class="white rounded-3 p-5">
+
+                <div class="d-inline-flex rounded-4 bd-1 bd-solid bd-blue bd-dark-2">
+                    <input type="text" class="form-control shadow-0 pl-5 bd-0 txt-blue txt-dark-2 mt-1 mb-1 rounded-4" placeholder="Search for topics" />
+                    <button class="btn bd-0 transparent mr-2">
+                        <span class="iconify font-s5 txt-blue txt-dark-2 center mr-0" data-icon="mdi:magnify" data-inline="false"></span>
+                    </button>
+                </div>
+
+                <p class="blue dark-3 txt-center mt-5 mb-4 pt-3 pb-3 rounded-2 font-w700">Latest</p>
+
+                <p><a href="#">Popular</a></p>
+                <p><a href="#">Older</a></p>
+
+                <div class="mb-5 mt-5">
+                    <div class="d-inline-flex txt-blue txt-dark-2" id="categories">
+                        <p class="font-s3">Categories (5)</p>
+                        <i class="mdi mdi-chevron-up vself-center font-s5 ml-3"></i>
+                    </div>
+                    <ul id="categories-list" class="p-0">
+                        <li class="shadow-4 p-3 rounded-2 mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
+                            <div class="txt-blue txt-dark-2 circle-icon rounded-1 pl-2 pr-2 pt-1 pb-1 bd-solid bd-1 mr-3">●</div> Technology
+                        </li>
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
+                            <div class="txt-green circle-icon rounded-1 pl-2 pr-2 pt-1 pb-1 bd-solid bd-1 mr-3">●</div> Social
+                        </li>
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
+                            <div class="txt-magenta txt-dark-2 circle-icon rounded-1 pl-2 pr-2 pt-1 pb-1 bd-solid bd-1 mr-3">●</div> Reader
+                        </li>
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
+                            <div class="txt-yellow txt-dark-2 circle-icon rounded-1 pl-2 pr-2 pt-1 pb-1 bd-solid bd-1 mr-3">●</div> Sports
+                        </li>
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
+                            <div class="txt-red txt-dark-2 circle-icon rounded-1 pl-2 pr-2 pt-1 pb-1 bd-solid bd-1 mr-3">●</div> Political
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="d-inline-flex txt-blue txt-dark-2" id="categories">
+                        <p class="font-s3">Topics (7)</p>
+                        <i class="mdi mdi-chevron-up vself-center font-s5 ml-3"></i>
+                    </div>
+                    <ul id="categories-list" class="p-0">
+                        <li class="shadow-4 p-3 rounded-2 mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
+                            <div class="txt-blue txt-dark-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Computer
+                        </li>
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
+                            <div class="txt-green pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Crypto currency
+                        </li>
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
+                            <div class="txt-magenta txt-dark-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Cybersecurity
+                        </li>
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
+                            <div class="txt-yellow txt-dark-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Web Developpement
+                        </li>
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
+                            <div class="txt-viride pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Python
+                        </li>
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
+                            <div class="txt-orange pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Network
+                        </li>
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
+                            <div class="txt-amaranth txt-light-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Gaming
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="white">
+                Content
+            </div>
+
+            <div class="white">
+                other
+            </div>
+        </div>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axentix@1.3.0/dist/js/axentix.min.js"></script>
 </body>
+
 </html>
