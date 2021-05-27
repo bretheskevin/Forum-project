@@ -15,6 +15,5 @@ for (const trigger of triggers) {
             }
         }
     })
-
-    trigger.click();
 }
+

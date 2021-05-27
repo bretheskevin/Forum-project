@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <title>Forum</title>
     <meta charset="utf-8">
@@ -34,7 +33,9 @@
             <div id="sidenav" class="white rounded-3 p-5">
 
                 <div class="d-inline-flex rounded-4 bd-1 bd-solid bd-blue bd-dark-2">
-                    <input type="text" class="form-control shadow-0 pl-5 bd-0 txt-blue txt-dark-2 mt-1 mb-1 rounded-4" placeholder="Search for topics" />
+                    <label>
+                        <input type="text" class="form-control shadow-0 pl-5 bd-0 txt-blue txt-dark-2 mt-1 mb-1 rounded-4" placeholder="Search for topics" />
+                    </label>
                     <button class="btn bd-0 transparent mr-2">
                         <span class="iconify font-s5 txt-blue txt-dark-2 center mr-0" data-icon="mdi:magnify" data-inline="false"></span>
                     </button>
@@ -46,11 +47,11 @@
                 <p><a href="#">Older</a></p>
 
                 <div class="mb-5 mt-5">
-                    <div class="d-inline-flex txt-blue txt-dark-2" id="categories">
+                    <div class="d-inline-flex txt-blue txt-dark-2 collapsible-trigger cursor-pointer" id="categories" data-target="categories-collapsible">
                         <p class="font-s3">Categories (5)</p>
-                        <i class="mdi mdi-chevron-up vself-center font-s5 ml-3"></i>
+                        <i class="mdi mdi-chevron-down vself-center font-s5 ml-3 chevrons"></i>
                     </div>
-                    <ul id="categories-list" class="p-0">
+                    <ul id="categories-collapsible" class="p-0 collapsible" data-ax="collapsible">
                         <li class="shadow-4 p-3 rounded-2 mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
                             <div class="txt-blue txt-dark-2 circle-icon rounded-1 pl-2 pr-2 pt-1 pb-1 bd-solid bd-1 mr-3">●</div> Technology
                         </li>
@@ -70,11 +71,11 @@
                 </div>
 
                 <div>
-                    <div class="d-inline-flex txt-blue txt-dark-2" id="categories">
+                    <div class="d-inline-flex txt-blue txt-dark-2 collapsible-trigger cursor-pointer" id="topics" data-target="topics-collapsible">
                         <p class="font-s3">Topics (7)</p>
-                        <i class="mdi mdi-chevron-up vself-center font-s5 ml-3"></i>
+                        <i class="mdi mdi-chevron-down vself-center font-s5 ml-3 chevrons"></i>
                     </div>
-                    <ul id="categories-list" class="p-0">
+                    <ul class="p-0 collapsible" id="topics-collapsible" data-ax="collapsible">
                         <li class="shadow-4 p-3 rounded-2 mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
                             <div class="txt-blue txt-dark-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Computer
                         </li>
@@ -82,10 +83,10 @@
                             <div class="txt-green pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Crypto currency
                         </li>
                         <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
-                            <div class="txt-magenta txt-dark-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Cybersecurity
+                            <div class="txt-magenta txt-dark-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Cyber-security
                         </li>
                         <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
-                            <div class="txt-yellow txt-dark-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Web Developpement
+                            <div class="txt-yellow txt-dark-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Web Development
                         </li>
                         <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
                             <div class="txt-viride pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Python
@@ -111,8 +112,8 @@
 
     </main>
 
-
     <script src="https://cdn.jsdelivr.net/npm/axentix@1.3.0/dist/js/axentix.min.js"></script>
+    <script src="scripts/chevrons.js"></script>
 </body>
 
 </html>

@@ -6,10 +6,6 @@ body {
     width: 350px;
 }
 
-#categories:hover {
-    cursor: pointer;
-}
-
 li {
     list-style: none;
 }
