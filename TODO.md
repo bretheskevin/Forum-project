@@ -14,3 +14,4 @@
 - [ ] &nbsp; (#3) Public API
 - [ ] &nbsp; (#4) Private API
 - [ ] &nbsp; (#5) Database
+- [ ] &nbsp; (#8) Routes
