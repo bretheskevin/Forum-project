@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Forum</title>
     <meta charset="utf-8">
@@ -12,13 +13,20 @@
 
 <body class="layout with-sidenav">
     <header>
-        <nav class="navbar white">
-            <a href="#" target="_blank" class="navbar-brand">Forum</a>
-            <div class="navbar-menu ml-auto">
-                <a class="navbar-link" href="#">Link 1</a>
-                <a class="navbar-link" href="#">Link 2</a>
-                <a class="navbar-link" href="#">Link 3</a>
-                <a class="navbar-link" href="#">Link 4</a>
+        <nav class="navbar white pb-5 pt-5 txt-blue txt-dark-4">
+            <p class="navbar-brand ml-2">Ynov Forum Project</p>
+            <div class="navbar-menu ml-auto cursor-pointer mr-5">
+                <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="4" cy="4" r="4" fill="#3E46F1"/>
+                    <circle cx="17" cy="4" r="4" fill="#3E46F1"/>
+                    <circle cx="30" cy="4" r="4" fill="#3E46F1"/>
+                    <circle cx="4" cy="17" r="4" fill="#3E46F1"/>
+                    <circle cx="17" cy="17" r="4" fill="#3E46F1"/>
+                    <circle cx="30" cy="17" r="4" fill="#3E46F1"/>
+                    <circle cx="4" cy="30" r="4" fill="#3E46F1"/>
+                    <circle cx="17" cy="30" r="4" fill="#3E46F1"/>
+                    <circle cx="30" cy="30" r="4" fill="#3E46F1"/>
+                    </svg>
             </div>
         </nav>
 
@@ -29,19 +37,24 @@
 
     <main>
 
-        <div class="grix xs3 m-5 pl-2 pr-2">
-            <div id="sidenav" class="white rounded-3 p-5">
+        <div class="grix xs2 md4 lg6  m-4 pl-2 pr-2 gutter-xs7">
+
+            <div id="sidenav" class="col-xs2 white rounded-3 p-5 mr-5">
 
                 <div class="d-inline-flex rounded-4 bd-1 bd-solid bd-blue bd-dark-2">
                     <label>
                         <input type="text" class="form-control shadow-0 pl-5 bd-0 txt-blue txt-dark-2 mt-1 mb-1 rounded-4" placeholder="Search for topics" />
                     </label>
                     <button class="btn bd-0 transparent mr-2">
-                        <span class="iconify font-s5 txt-blue txt-dark-2 center mr-0" data-icon="mdi:magnify" data-inline="false"></span>
+                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.0095 0C4.93901 0 0 4.93901 0 11.0095C0 17.0803 4.93901 22.0189 11.0095 22.0189C17.0803 22.0189 22.0189 17.0803 22.0189 11.0095C22.0189 4.93901 17.0803 0 11.0095 0ZM11.0095 19.9865C6.05962 19.9865 2.03252 15.9594 2.03252 11.0095C2.03252 6.05967 6.05962 2.03252 11.0095 2.03252C15.9593 2.03252 19.9864 6.05962 19.9864 11.0095C19.9864 15.9593 15.9593 19.9865 11.0095 19.9865Z" fill="#3E46F1"/>
+                            <path d="M24.7022 23.2652L18.8756 17.4387C18.4786 17.0417 17.8357 17.0417 17.4386 17.4387C17.0416 17.8354 17.0416 18.479 17.4386 18.8757L23.2652 24.7022C23.4637 24.9007 23.7235 25 23.9837 25C24.2435 25 24.5037 24.9007 24.7022 24.7022C25.0992 24.3056 25.0992 23.6619 24.7022 23.2652Z" fill="#3E46F1"/>
+                            </svg>                            
                     </button>
+
                 </div>
 
-                <p class="blue dark-3 txt-center mt-5 mb-4 pt-3 pb-3 rounded-2 font-w700">Latest</p>
+                <p class="bg-primary txt-white txt-center mt-5 mb-4 pt-3 pb-3 rounded-2 font-w700">Latest</p>
 
                 <p><a href="#">Popular</a></p>
                 <p><a href="#">Older</a></p>
@@ -101,19 +114,194 @@
                 </div>
             </div>
 
-            <div class="white">
-                Content
+            <div class="col-xs2 rounded-3 p-5 mr-5">
+                <a href="#">
+                    <p class="bg-primary txt-white txt-center mt-5 mb-5 ml-5 pt-3 pb-3 rounded-2 font-w700" id="new-topic">+ Start a new topic</p>
+                </a>
+
+                <br />
+
+                <ol id="top-members">
+                    <h1 class="text-primary font-w600 font-s5">Top Members</h1>
+                    <li>
+                        <div class="d-inline-flex vcenter w100">
+                            <img src="images/pp.jpg" alt="Profile picture" width="35" height="35" class="rounded-4 mr-4">
+                            <p>Kévin BRETHES</p>
+                            <p class="ml-auto txt-blue txt-dark-4">13K</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-inline-flex vcenter w100">
+                            <img src="images/pp.jpg" alt="Profile picture" width="35" height="35" class="rounded-4 mr-4">
+                            <p>Kévin BRETHES</p>
+                            <p class="ml-auto txt-blue txt-dark-4">13K</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-inline-flex vcenter w100">
+                            <img src="images/pp.jpg" alt="Profile picture" width="35" height="35" class="rounded-4 mr-4">
+                            <p>Kévin BRETHES</p>
+                            <p class="ml-auto txt-blue txt-dark-4">13K</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-inline-flex vcenter w100">
+                            <img src="images/pp.jpg" alt="Profile picture" width="35" height="35" class="rounded-4 mr-4">
+                            <p>Kévin BRETHES</p>
+                            <p class="ml-auto txt-blue txt-dark-4">13K</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-inline-flex vcenter w100">
+                            <img src="images/pp.jpg" alt="Profile picture" width="35" height="35" class="rounded-4 mr-4">
+                            <p>Kévin BRETHES</p>
+                            <p class="ml-auto txt-blue txt-dark-4">13K</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-inline-flex vcenter w100">
+                            <img src="images/pp.jpg" alt="Profile picture" width="35" height="35" class="rounded-4 mr-4">
+                            <p>Kévin BRETHES</p>
+                            <p class="ml-auto txt-blue txt-dark-4">13K</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-inline-flex vcenter w100">
+                            <img src="images/pp.jpg" alt="Profile picture" width="35" height="35" class="rounded-4 mr-4">
+                            <p>Kévin BRETHES</p>
+                            <p class="ml-auto txt-blue txt-dark-4">13K</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-inline-flex vcenter w100">
+                            <img src="images/pp.jpg" alt="Profile picture" width="35" height="35" class="rounded-4 mr-4">
+                            <p>Kévin BRETHES</p>
+                            <p class="ml-auto txt-blue txt-dark-4">13K</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-inline-flex vcenter w100">
+                            <img src="images/pp.jpg" alt="Profile picture" width="35" height="35" class="rounded-4 mr-4">
+                            <p>Kévin BRETHES</p>
+                            <p class="ml-auto txt-blue txt-dark-4">13K</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-inline-flex vcenter w100">
+                            <img src="images/pp.jpg" alt="Profile picture" width="35" height="35" class="rounded-4 mr-4">
+                            <p>Kévin BRETHES</p>
+                            <p class="ml-auto txt-blue txt-dark-4">13K</p>
+                        </div>
+                    </li>
+                </ol>
+
+                <br />
+
+                <div id="popular-tags">
+                    <h1 class="text-primary font-w600 font-s5 mb-4">Popular tags</h1>
+                    <div class="d-flex fx-wrap">
+                        <a href="#" class="bg-secondary txt-white font-s3 font-w500 mr-4 p-2 pl-4 pr-4 mb-3 rounded-1">
+                            Linux
+                        </a>
+
+                        <a href="#" class="bg-secondary txt-white font-s3 font-w500 mr-4 p-2 pl-4 pr-4 mb-3 rounded-1">
+                            MacOS
+                        </a>
+
+                        <a href="#" class="bg-secondary txt-white font-s3 font-w500 mr-4 p-2 pl-4 pr-4 mb-3 rounded-1">
+                            Electronics
+                        </a>
+
+                        <a href="#" class="bg-secondary txt-white font-s3 font-w500 mr-4 p-2 pl-4 pr-4 mb-3 rounded-1">
+                            TCP/IP
+                        </a>
+
+                        <a href="#" class="bg-secondary txt-white font-s3 font-w500 mr-4 p-2 pl-4 pr-4 mb-3 rounded-1">
+                            Cyber News
+                        </a>
+
+                        <a href="#" class="bg-secondary txt-white font-s3 font-w500 mr-4 p-2 pl-4 pr-4 mb-3 rounded-1">
+                            Arch
+                        </a>
+
+                        <a href="#" class="bg-secondary txt-white font-s3 font-w500 mr-4 p-2 pl-4 pr-4 mb-3 rounded-1">
+                            Cryptography
+                        </a>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="white">
-                other
+            <div class="col-xs2 pos-lg3 pos-row-lg1 rounded-3 mr-5">
+                <h1 class="txt-blue txt-dark-4 font-w600 font-s3 txt-center mb-5" id="nb-of-posts">10 posts</h1>
+
+                <div class="card shadow-1 rounded-2 white posts">
+                    <div class="card-header d-inline-flex vcenter w100 pb-2">
+                        <img src="images/pp.jpg" alt="Profile picture" width="40" height="40" class="rounded-4 mr-4">
+                        <p class="txt-grey txt-dark-3 font-s2">Posted by Kévin</p>
+                        <p class="txt-grey txt-dark-3 font-s2 ml-auto">1h ago</p>
+                    </div>
+                    <div class="card-content pt-0">
+                        <h1 class="font-s3">How to build your own computer</h1>
+
+                        <p class="txt-grey txt-dark-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non veritatis excepturi natus impedit distinctio quidem, nesciunt id possimus quia, tempore fuga doloribus reiciendis facilis voluptate accusantium! Adipisci est nam soluta!
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non veritatis excepturi natus impedit distinctio quidem, nesciunt id possimus quia, tempore fuga doloribus reiciendis facilis voluptate accusantium! Adipisci est nam
+                            soluta!
+                        </p>
+
+
+                    </div>
+                    <div class="card-footer pt-0 d-inline-flex vcenter">
+                        <div class="likes d-inline-flex vcenter txt-green mr-3 cursor-pointer">
+                            <svg width="30" height="30" viewBox="0 0 14 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.20081 0.335369C6.20048 0.335712 6.20008 0.335999 6.19974 0.336399L0.328771 6.31123C-0.111044 6.75884 -0.109407 7.48283 0.332609 7.92838C0.774569 8.37387 1.48942 8.37216 1.92929 7.92455L5.87097 3.91304L5.87097 28.1292C5.87097 28.7608 6.37644 29.2727 7 29.2727C7.62356 29.2727 8.12903 28.7608 8.12903 28.1292L8.12903 3.9131L12.0707 7.92449C12.5106 8.3721 13.2254 8.37382 13.6674 7.92832C14.1095 7.48277 14.111 6.75873 13.6712 6.31118L7.80026 0.33634C7.79992 0.335997 7.79952 0.335711 7.79919 0.335312C7.35785 -0.112528 6.64069 -0.111097 6.20081 0.335369Z" fill="#34C931"/>
+                            </svg>
+                            <p class="ml-2">1.5K</p>
+                        </div>
+                        <div class="dislikes d-inline-flex vcenter txt-grey txt-dark-2 cursor-pointer">
+                            <svg width="30" height="30" viewBox="0 0 14 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.79919 28.9373C7.79952 28.937 7.79992 28.9367 7.80026 28.9363L13.6712 22.9615C14.111 22.5139 14.1094 21.7899 13.6674 21.3443C13.2254 20.8988 12.5106 20.9005 12.0707 21.3482L8.12903 25.3597L8.12903 1.14347C8.12903 0.51193 7.62356 0 7 0C6.37644 0 5.87097 0.51193 5.87097 1.14347L5.87097 25.3596L1.92929 21.3482C1.48942 20.9006 0.77457 20.8989 0.332609 21.3444C-0.109464 21.7899 -0.110988 22.514 0.328771 22.9615L6.19974 28.9364C6.20008 28.9367 6.20048 28.937 6.20081 28.9374C6.64215 29.3852 7.35931 29.3838 7.79919 28.9373Z" fill="#C4C4C4"/>
+                                </svg>
+                            <p class="ml-2">50</p>
+                        </div>
+                        <div class="d-inline-flex ml-5 cursor-pointer">
+                            <svg width="30" height="30" viewBox="0 0 21 5" fill="none" xmlns="http://www.w3.org/2000/svg" class="more-svg">
+                            <circle cx="2.5" cy="2.5" r="2.5" fill="#41599D"/>
+                            <circle cx="10.5" cy="2.5" r="2.5" fill="#41599D"/>
+                            <circle cx="18.5" cy="2.5" r="2.5" fill="#41599D"/>
+                            </svg>
+                        </div>
+
+                        <div class="ml-auto">
+                            <div class="d d-inline-flex vcenter text-primary">
+                                <svg width="30" height="30" viewBox="0 0 29 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.17944 8.4507C0.431738 8.10557 6.44314 0 14.1208 0C21.7984 0 27.8101 8.10557 28.0621 8.45037C28.3011 8.77779 28.3011 9.22188 28.0621 9.5493C27.8101 9.89443 21.7984 18 14.1208 18C6.44314 18 0.431738 9.89438 0.17944 9.54958C-0.0598392 9.22221 -0.0598392 8.77779 0.17944 8.4507ZM14.1208 16.1379C19.7762 16.1379 24.6744 10.7581 26.1243 8.99937C24.6762 7.23908 19.7883 1.86206 14.1208 1.86206C8.46565 1.86206 3.5678 7.24095 2.11723 9.00063C3.56532 10.7609 8.45324 16.1379 14.1208 16.1379Z" fill="#C4C4C4"/>
+                                <path d="M14.1208 3.41379C17.201 3.41379 19.707 5.91983 19.707 9.00002C19.707 12.0802 17.201 14.5863 14.1208 14.5863C11.0406 14.5863 8.53456 12.0802 8.53456 9.00002C8.53456 5.91983 11.0406 3.41379 14.1208 3.41379ZM14.1208 12.7241C16.1744 12.7241 17.8449 11.0535 17.8449 9.00002C17.8449 6.9465 16.1743 5.2759 14.1208 5.2759C12.0673 5.2759 10.3967 6.9465 10.3967 9.00002C10.3967 11.0535 12.0672 12.7241 14.1208 12.7241Z" fill="#C4C4C4"/>
+                                </svg>
+                                <p class="ml-1 font-w600">3.6K</p>
+                            </div>
+
+                            <div class="d d-inline-flex vcenter text-primary ml-2">
+                                <svg width="26" height="26" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.0567 18.4905H1.56871L2.6209 17.4383C3.18823 16.871 3.54251 16.1331 3.63776 15.3326C2.15732 14.3611 1.07476 13.0829 0.495268 11.6171C-0.0838141 10.1523 -0.156585 8.53992 0.284846 6.95409C0.814497 5.05125 2.05677 3.31687 3.78276 2.07041C5.65836 0.715953 7.99326 0 10.5351 0C13.7371 0 16.4361 0.919966 18.3401 2.66038C20.0553 4.22833 21 6.34328 21 8.61569C21 9.7197 20.7752 10.7939 20.3319 11.8085C19.8731 12.8584 19.2013 13.7932 18.3352 14.587C16.4286 16.3343 13.7314 17.2578 10.5351 17.2578C9.3485 17.2578 8.11033 17.0994 7.00488 16.8088C5.95852 17.8822 4.54063 18.4905 3.0567 18.4905ZM10.5351 1.2327C5.43832 1.2327 2.31092 4.27226 1.47239 7.28466C0.680009 10.1314 1.84808 12.8213 4.597 14.4801L4.90415 14.6655L4.8947 15.0241C4.87596 15.7339 4.70676 16.4175 4.40388 17.0355C5.14141 16.786 5.81064 16.3336 6.3347 15.7144L6.5953 15.4066L6.98175 15.5221C8.06624 15.8465 9.32816 16.0251 10.5351 16.0251C16.8783 16.0251 19.7673 12.1843 19.7673 8.61569C19.7673 6.69366 18.9651 4.9018 17.5083 3.57024C15.8354 2.04103 13.4241 1.2327 10.5351 1.2327Z" fill="#C4C4C4"/>
+                                </svg>
+                                <p class="ml-1 font-w600">15</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
             </div>
+
         </div>
 
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/axentix@1.3.0/dist/js/axentix.min.js"></script>
     <script src="scripts/chevrons.js"></script>
+    <script src="scripts/posts.js"></script>
 </body>
 
 </html>
