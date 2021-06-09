@@ -23,5 +23,4 @@ for (const collapsible of collapsibles) {
 
 for (const trigger of document.body.getElementsByClassName("collapsible-trigger")) {
     trigger.dispatchEvent(new Event("click"));
-    console.log("xd");
 }
