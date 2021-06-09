@@ -8,12 +8,32 @@ import (
 )
 
 func homePage(w http.ResponseWriter, r *http.Request) {
+    if r.URL.Path != "/" {
+        errorHandler(w, r)
+        return
+    }
+
     page, err := template.ParseFiles("public/homepage.html")
     if err != nil {
         log.Fatal(err)
     }
     errorExecuteTemplate := page.ExecuteTemplate(w, "homepage.html", "")
     if errorExecuteTemplate != nil {
+    	http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+}
+
+func errorHandler(w http.ResponseWriter, r *http.Request) {
+    w.WriteHeader(http.StatusNotFound)
+
+    page, err := template.ParseFiles("public/404.html")
+    if err != nil {
+        log.Fatal(err)
+    }
+    errorExecuteTemplate := page.ExecuteTemplate(w, "404.html", "")
+    if errorExecuteTemplate != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
         return
     }
 }
