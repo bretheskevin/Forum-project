@@ -7,8 +7,7 @@
 - [ ] &nbsp; (#6) Page to edit the profile (Name, picture, password etc...)
 - [ ] &nbsp; (#7) Admin interface to create/delete profiles manually, 
   add/delete forum categories, ban users...
-- [ ] &nbsp; (#9) 404 error page
-  
+- [x] &nbsp; (#9) 404 error page
 
 
 ## Server
