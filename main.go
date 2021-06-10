@@ -24,6 +24,32 @@ func homePage(w http.ResponseWriter, r *http.Request) {
     }
 }
 
+func dashboardPage(w http.ResponseWriter, r *http.Request) {
+    page, err := template.ParseFiles("public/dashboard.html")
+    if err != nil {
+        log.Fatal(err)
+    }
+    errorExecuteTemplate := page.ExecuteTemplate(w, "dashboard.html", "")
+    if errorExecuteTemplate != nil {
+    	http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+}
+
+func dashboardPostsPage(w http.ResponseWriter, r *http.Request) {
+    page, err := template.ParseFiles("public/dashboard-posts.html")
+    if err != nil {
+        log.Fatal(err)
+    }
+    errorExecuteTemplate := page.ExecuteTemplate(w, "dashboard-posts.html", "")
+    if errorExecuteTemplate != nil {
+    	http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+}
+
+
+
 func errorHandler(w http.ResponseWriter, r *http.Request) {
     w.WriteHeader(http.StatusNotFound)
 
@@ -49,6 +75,9 @@ func main() {
 
 	//This method takes the URL path and a function that will show the page
 	http.HandleFunc("/", homePage)
+	http.HandleFunc("/admin/dashboard/", dashboardPage)
+	http.HandleFunc("/admin/dashboard/posts", dashboardPostsPage)
+
 
 	//start the server and use fmt to print the errors
 	fmt.Println("Listening on http://localhost" + port)
