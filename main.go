@@ -24,6 +24,18 @@ func homePage(w http.ResponseWriter, r *http.Request) {
     }
 }
 
+func feedPage(w http.ResponseWriter, r *http.Request) {
+    page, err := template.ParseFiles("public/feed.html")
+    if err != nil {
+        log.Fatal(err)
+    }
+    errorExecuteTemplate := page.ExecuteTemplate(w, "feed.html", "")
+    if errorExecuteTemplate != nil {
+    	http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+}
+
 func dashboardPage(w http.ResponseWriter, r *http.Request) {
     page, err := template.ParseFiles("public/dashboard.html")
     if err != nil {
@@ -75,6 +87,8 @@ func main() {
 
 	//This method takes the URL path and a function that will show the page
 	http.HandleFunc("/", homePage)
+	http.HandleFunc("/homepage", homePage)
+	http.HandleFunc("/feed", feedPage)
 	http.HandleFunc("/admin/dashboard/", dashboardPage)
 	http.HandleFunc("/admin/dashboard/posts", dashboardPostsPage)
 
