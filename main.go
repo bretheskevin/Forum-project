@@ -8,7 +8,7 @@ import (
 )
 
 func homePage(w http.ResponseWriter, r *http.Request) {
-    if r.URL.Path != "/" {
+    if r.URL.Path != "/" && r.URL.Path != "/homepage" {
         errorHandler(w, r)
         return
     }
@@ -60,7 +60,29 @@ func dashboardPostsPage(w http.ResponseWriter, r *http.Request) {
     }
 }
 
+func registerPage(w http.ResponseWriter, r *http.Request) {
+    page, err := template.ParseFiles("public/register.html")
+    if err != nil {
+        log.Fatal(err)
+    }
+    errorExecuteTemplate := page.ExecuteTemplate(w, "register.html", "")
+    if errorExecuteTemplate != nil {
+    	http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+}
 
+func loginPage(w http.ResponseWriter, r *http.Request) {
+    page, err := template.ParseFiles("public/login.html")
+    if err != nil {
+        log.Fatal(err)
+    }
+    errorExecuteTemplate := page.ExecuteTemplate(w, "login.html", "")
+    if errorExecuteTemplate != nil {
+    	http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+}
 
 func errorHandler(w http.ResponseWriter, r *http.Request) {
     w.WriteHeader(http.StatusNotFound)
@@ -91,6 +113,8 @@ func main() {
 	http.HandleFunc("/feed", feedPage)
 	http.HandleFunc("/admin/dashboard/", dashboardPage)
 	http.HandleFunc("/admin/dashboard/posts", dashboardPostsPage)
+	http.HandleFunc("/register", registerPage)
+	http.HandleFunc("/login", loginPage)
 
 
 	//start the server and use fmt to print the errors
