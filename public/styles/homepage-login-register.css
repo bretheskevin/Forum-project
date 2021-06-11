@@ -2,16 +2,16 @@
     --main-color: #2B637E;
 }
 
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 
 body {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
-body {
-
-}
 main {
     background: url("/images/background.jpg") no-repeat;
     background-size: cover;
