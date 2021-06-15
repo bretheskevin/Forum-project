@@ -14,17 +14,22 @@ func main() {
 	db := database.OpenDB("database/forum.db")
 	database.Init(db) // create the different tables
 
-	user := structures.User{
-		ID:       1,
-		Username: "Kevin",
-	}
-
 	post := structures.Post{
-		Title:   "Les aventures",
-		Content: "INCROYABLE !!!",
+		Title:       "Les aventures de Kévin",
+		Content:     "INCROYABLE !!!",
+		PublisherID: 1,
+		Category:    "Cybersecurity",
 	}
+	database.AddPost(db, post)
 
-	database.AddPost(db, user, post)
+	user := structures.User{
+		Username:          "Kévin",
+		Email:             "kevin.brethes@ynov.com",
+		Password:          "Pa$$W0rD",
+		ProfilePictureURL: "https://cdn.discordapp.com/attachments/508258795877564416/778390220650709002/20201018_192834.jpg",
+		IsAdmin:           false,
+	}
+	database.AddUser(db, user)
 
 	return
 
