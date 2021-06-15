@@ -1,13 +1,33 @@
 package main
 
 import (
+	"./database"
 	"./routes"
+	"./structures"
 	"fmt"
 	"log"
 	"net/http"
 )
 
 func main() {
+
+	db := database.OpenDB("database/forum.db")
+	database.Init(db) // create the different tables
+
+	user := structures.User{
+		ID:       1,
+		Username: "Kevin",
+	}
+
+	post := structures.Post{
+		Title:   "Les aventures",
+		Content: "INCROYABLE !!!",
+	}
+
+	database.AddPost(db, user, post)
+
+	return
+
 	port := ":8080"
 
 	// allow the server to access to the files
