@@ -72,17 +72,25 @@ func RegisterPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func LoginPage(w http.ResponseWriter, r *http.Request) {
-	type User struct {
-		username string
-		password string
-	}
-	//user := User{"", ""}
 
 	page, err := template.ParseFiles("public/login.html")
 	if err != nil {
 		log.Fatal(err)
 	}
 	errorExecuteTemplate := page.ExecuteTemplate(w, "login.html", "")
+	if errorExecuteTemplate != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+}
+
+func CreateTopic(w http.ResponseWriter, r *http.Request) {
+	page, err := template.ParseFiles("public/new-topic.html")
+	if err != nil {
+		log.Fatal(err)
+	}
+	errorExecuteTemplate := page.ExecuteTemplate(w, "new-topic.html", "")
 	if errorExecuteTemplate != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
