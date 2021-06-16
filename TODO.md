@@ -9,6 +9,7 @@
   add/delete forum categories, ban users...
 - [x] &nbsp; (#9) 404 error page
 - [ ] &nbsp; (#10) Use templates to split the html files
+- [ ] &nbsp; (#12) Create post page interface
 
 
 ## Server
