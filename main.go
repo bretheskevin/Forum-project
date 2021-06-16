@@ -17,7 +17,7 @@ func main() {
 	post := structures.Post{
 		Title:       "Les aventures de Kévin",
 		Content:     "INCROYABLE !!!",
-		PublisherID: 1,
+		PublisherID: 2,
 		Category:    "Cybersecurity",
 	}
 	database.AddPost(db, post)
