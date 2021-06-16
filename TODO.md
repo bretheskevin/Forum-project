@@ -10,10 +10,10 @@
 - [x] &nbsp; (#9) 404 error page
 - [ ] &nbsp; (#10) Use templates to split the html files
 
-
 ## Server
 
 - [ ] &nbsp; (#3) Public API
 - [ ] &nbsp; (#4) Private API
 - [ ] &nbsp; (#5) Database
 - [x] &nbsp; (#8) Routes
+- [ ] &nbsp; (#11) Bcrypt
