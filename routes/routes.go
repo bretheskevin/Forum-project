@@ -72,6 +72,12 @@ func RegisterPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func LoginPage(w http.ResponseWriter, r *http.Request) {
+	type User struct {
+		username string
+		password string
+	}
+	//user := User{"", ""}
+
 	page, err := template.ParseFiles("public/login.html")
 	if err != nil {
 		log.Fatal(err)
@@ -81,6 +87,7 @@ func LoginPage(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
 }
 
 func errorHandler(w http.ResponseWriter, r *http.Request) {
