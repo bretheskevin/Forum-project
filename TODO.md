@@ -10,6 +10,7 @@
 - [x] &nbsp; (#9) 404 error page
 - [ ] &nbsp; (#10) Use templates to split the html files
 - [x] &nbsp; (#12) Create post page interface
+- [ ] &nbsp; (#13) Post details + comments (when you click on the post)
 
 
 ## Server
