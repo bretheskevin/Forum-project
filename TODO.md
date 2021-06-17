@@ -20,3 +20,5 @@
 - [x] &nbsp; (#5) Database
 - [x] &nbsp; (#8) Routes
 - [x] &nbsp; (#11) Bcrypt
+- [ ] &nbsp; (#14) Login and register
+
