@@ -19,4 +19,4 @@
 - [ ] &nbsp; (#4) Private API
 - [ ] &nbsp; (#5) Database
 - [x] &nbsp; (#8) Routes
-- [ ] &nbsp; (#11) Bcrypt
+- [x] &nbsp; (#11) Bcrypt
