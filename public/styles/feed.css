@@ -45,3 +45,7 @@ li {
 #underline {
     text-decoration: underline;
 }
+
+.cards-color {
+    background-color: #F4F5F9;
+}
