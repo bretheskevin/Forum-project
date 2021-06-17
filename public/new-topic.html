@@ -20,13 +20,11 @@
                 <a class="navbar-link" href="/dashboard">Dashboard</a>
             </div>
         </nav>
-
-
     </header>
 
     <main>
         <div class="grix xs4 m-4 pl-2 pr-2 gutter-xs7">
-            <div id="sidenav" class="col-xs1 rounded-3 p-5 mr-5 cards-color">
+            <div id="sidenav" class="col-xs4 col-lg1 rounded-3 p-5 mr-5 cards-color">
                 <h1 class="txt-blue txt-dark-4 font-s5">Choose a category and a topic !</h1>
 
 
@@ -36,85 +34,84 @@
                         <i class="mdi mdi-chevron-down vself-center font-s5 ml-3 chevrons"></i>
                     </div>
                     <ul id="categories-collapsible" class="p-0 collapsible" data-ax="collapsible">
-                        <li class="shadow-4 p-3 rounded-2 mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 white">
-                            <div class="txt-blue txt-dark-2 circle-icon rounded-1 pl-2 pr-2 pt-1 pb-2 bd-solid bd-1 mr-3">●</div> Technology
+                        <li class="shadow-4 p-3 rounded-2 white mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 cursor-pointer categories" id="technology">
+                            <div class="txt-blue circle-icon rounded-1 pl-2 pr-2 pt-1 pb-2 bd-solid bd-1 mr-3">●</div> Technology
                         </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 cursor-pointer categories" id="social">
                             <div class="txt-green circle-icon rounded-1 pl-2 pr-2 pt-1 pb-2 bd-solid bd-1 mr-3">●</div> Social
                         </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 cursor-pointer categories" id="reader">
                             <div class="txt-magenta txt-dark-2 circle-icon rounded-1 pl-2 pr-2 pt-1 pb-2 bd-solid bd-1 mr-3">●</div> Reader
                         </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 cursor-pointer categories" id="sports">
                             <div class="txt-yellow txt-dark-2 circle-icon rounded-1 pl-2 pr-2 pt-1 pb-2 bd-solid bd-1 mr-3">●</div> Sports
                         </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 cursor-pointer categories" id="political">
                             <div class="txt-red txt-dark-2 circle-icon rounded-1 pl-2 pr-2 pt-1 pb-2 bd-solid bd-1 mr-3">●</div> Political
                         </li>
                     </ul>
                 </div>
 
-                <div>
-                    <div class="d-inline-flex txt-blue txt-dark-2 collapsible-trigger cursor-pointer" id="topics" data-target="topics-collapsible">
-                        <p class="font-s3">Topics (7)</p>
-                        <i class="mdi mdi-chevron-down vself-center font-s5 ml-3 chevrons"></i>
-                    </div>
-                    <ul class="p-0 collapsible" id="topics-collapsible" data-ax="collapsible">
-                        <li class="shadow-4 p-3 rounded-2 mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 white">
-                            <div class="txt-blue txt-dark-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Computer
-                        </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
-                            <div class="txt-green pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Crypto currency
-                        </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
-                            <div class="txt-magenta txt-dark-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Cyber-security
-                        </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
-                            <div class="txt-yellow txt-dark-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Web Development
-                        </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
-                            <div class="txt-viride pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Python
-                        </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
-                            <div class="txt-orange pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Network
-                        </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5">
-                            <div class="txt-amaranth txt-light-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Gaming
-                        </li>
-                    </ul>
+
+                <div class="d-inline-flex txt-blue txt-dark-2 collapsible-trigger cursor-pointer" id="topics" data-target="topics-collapsible">
+                    <p class="font-s3">Topics (7)</p>
+                    <i class="mdi mdi-chevron-down vself-center font-s5 ml-3 chevrons"></i>
                 </div>
+                <ul class="p-0 collapsible" id="topics-collapsible" data-ax="collapsible">
+                    <li class="shadow-4 p-3 rounded-2 white mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 cursor-pointer topics" id="computer">
+                        <div class="txt-blue txt-dark-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Computer
+                    </li>
+                    <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 cursor-pointer topics" id="crypto_currency">
+                        <div class="txt-green pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Crypto currency
+                    </li>
+                    <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 cursor-pointer topics" id="cyber_security">
+                        <div class="txt-magenta txt-dark-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Cyber-security
+                    </li>
+                    <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 cursor-pointer topics" id="web_development">
+                        <div class="txt-yellow txt-dark-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Web Development
+                    </li>
+                    <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 cursor-pointer topics" id="python">
+                        <div class="txt-viride pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Python
+                    </li>
+                    <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 cursor-pointer topics" id="network">
+                        <div class="txt-orange pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Network
+                    </li>
+                    <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 cursor-pointer topics" id="gaming">
+                        <div class="txt-amaranth txt-light-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Gaming
+                    </li>
+                </ul>
             </div>
 
 
             <div class="col-xs4 col-lg3 cards-color mr-5 rounded-4 p-4">
-               <form class="mr-5 ml-5" action="/create-new-topic" method="post" id="create-topic-form">
-                   <div class="grix xs6 mb-5">
-                       <div class="form-field col-xs2">
-                           <input type="text" id="title" class="form-control rounded-2 pl-3 white" placeholder="Title" />
-                       </div>
-                       <div class="form-field col-xs6">
-                           <textarea rows="15" id="content" class="form-control rounded-1 white" placeholder="Content" min="3"></textarea>
-                       </div>
+                <form class="mr-5 ml-5" action="/create-new-topic" method="post" id="create-topic-form">
+                    <div class="grix xs6 mb-5">
+                        <div class="form-field col-xs2">
+                            <input type="text" id="title" class="form-control rounded-2 pl-3 white" placeholder="Title" />
+                        </div>
+                        <div class="form-field col-xs6">
+                            <textarea rows="15" id="content" class="form-control rounded-1 white" placeholder="Content" min="3"></textarea>
+                        </div>
 
-                       <div class="form-field col-xs6 hide">
-                           <p id="category">Technology</p>
-                       </div>
-                       <div class="form-field col-xs6 hide">
-                           <p id="topic">Computer</p>
-                       </div>
+                        <div class="form-field col-xs6 hide">
+                            <p id="category">technology</p>
+                        </div>
+                        <div class="form-field col-xs6 hide">
+                            <p id="topic">computer</p>
+                        </div>
 
-                       <div class="form-file col-xs6">
-                           <label for="img" class="btn primary rounded-1 shadow-1 upload-image-bg w100 upload-image-color pt-4 pb-4 d-flex">
+                        <div class="form-file col-xs6">
+                            <label for="img" class="btn primary rounded-1 shadow-1 upload-image-bg w100 upload-image-color pt-4 pb-4 d-flex">
                                <span class="ml-auto">Upload image</span>
                                <svg width="23" height="18" viewBox="0 0 23 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="ml-auto">
                                    <path d="M19.1034 5.96394C18.0438 1.74245 13.7626 -0.820676 9.54109 0.239017C6.2421 1.06717 3.84666 3.91843 3.59985 7.31079C1.25743 7.69708 -0.328344 9.90911 0.0579473 12.2515C0.401342 14.334 2.20577 15.859 4.31629 15.8507H7.89845V14.4178H4.31629C2.7336 14.4178 1.45056 13.1348 1.45056 11.5521C1.45056 9.96938 2.7336 8.68634 4.31629 8.68634C4.71198 8.68634 5.03272 8.3656 5.03272 7.9699C5.02914 4.40883 7.91309 1.5191 11.4742 1.51556C14.5568 1.51248 17.2104 3.69177 17.8067 6.71615C17.8656 7.01812 18.1107 7.24881 18.4157 7.28929C20.3743 7.56821 21.7359 9.38208 21.4571 11.3407C21.2066 13.0994 19.705 14.4089 17.9285 14.4178H15.0628V15.8507H17.9285C20.6982 15.8423 22.9367 13.5902 22.9283 10.8205C22.9213 8.51488 21.3432 6.51107 19.1034 5.96394Z" fill="#2B3F92"/>
                                    <path d="M10.9719 8.89438L8.1062 11.7601L9.11637 12.7703L10.7642 11.1297V18.0002H12.197V11.1297L13.8377 12.7703L14.8478 11.7601L11.9821 8.89438C11.7026 8.61659 11.2514 8.61659 10.9719 8.89438Z" fill="#2B3F92"/>
                                </svg>
                            </label>
-                           <input type="file" name="img" id="img" multiple accept="image/png, image/jpeg" />
-                       </div>
-                   </div>
-               </form>
+                            <input type="file" name="img" id="img" multiple accept="image/png, image/jpeg" />
+                        </div>
+                    </div>
+                </form>
                 <div class="d-flex">
                     <button class="btn rounded-1 bg-primary txt-white mt-5 rounded-2 pt-3 pb-3 center ml-auto mr-auto" type="submit" value="+ New Post" id="form-submit-btn" form="create-topic-form">+ New Post</button>
                 </div>
@@ -123,13 +120,8 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/axentix@1.3.0/dist/js/axentix.min.js"></script>
-    <script>
-        submitForm = function() {
-            for (let form of document.forms) {
-                form.submit();
-            }
-        }
-    </script>
+    <script src="/scripts/chevrons.js"></script>
+    <script src="/scripts/categories-topics-selection.js"></script>
 
 </body>
 
