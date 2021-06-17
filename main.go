@@ -9,7 +9,6 @@ import (
 )
 
 func main() {
-
 	// db := database.OpenDB("database/forum.db")
 	// database.Init(db) // create the different tables
 
