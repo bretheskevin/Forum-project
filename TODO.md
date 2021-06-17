@@ -17,6 +17,6 @@
 
 - [ ] &nbsp; (#3) Public API
 - [ ] &nbsp; (#4) Private API
-- [ ] &nbsp; (#5) Database
+- [x] &nbsp; (#5) Database
 - [x] &nbsp; (#8) Routes
 - [x] &nbsp; (#11) Bcrypt
