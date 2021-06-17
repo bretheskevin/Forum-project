@@ -7,6 +7,8 @@ import (
 	"testing"
 )
 
+// Used for debugging
+
 func TestPassword(t *testing.T) {
 
 	password := RandomString(6)

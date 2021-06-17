@@ -1,5 +1,7 @@
 package util
 
+// Used for debugging
+
 import (
 	"math/rand"
 	"strings"
