@@ -6,10 +6,13 @@ for (let content of contents) {
 
     finalContent = "";
     for (let i = 0; i < 150; i++) {
-        finalContent += content.textContent[i];
+        if (content.textContent.length > i) {
+            finalContent += content.textContent[i];
+        }
+
     }
 
-    finalContent += " <a href='#' class='text-primary cursor-pointer' id='underline'>see more</a>"
+    finalContent += " <span class='text-primary cursor-pointer post-details' id='underline'>see more</span>"
 
     content.innerHTML = finalContent;
 }
