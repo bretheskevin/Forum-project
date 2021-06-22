@@ -68,15 +68,22 @@ func register(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 	register, token := auth.Register(formattedBody.Username, formattedBody.Email, formattedBody.Password)
+
+	if token == "email" {
+		res := "email already registered"
+		json.NewEncoder(w).Encode(res)
+	}
+	if token == "name" {
+		res := "username already taken"
+		json.NewEncoder(w).Encode(res)
+	}
+
 	if register == true {
 		res := "user log"
 		cookie := http.Cookie{Name: "token", Value: token, Expires: time.Now().Add(time.Minute * 60)}
 		http.SetCookie(w, &cookie)
 		json.NewEncoder(w).Encode(res)
 
-	} else {
-		res := "Wrong password or email"
-		json.NewEncoder(w).Encode(res)
 	}
 }
 

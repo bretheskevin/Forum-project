@@ -96,11 +96,32 @@ submitBtn.addEventListener("click", () => {
     const password = document.getElementById("password").value;
 
     const request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            setErrorMessage(this.responseText);
+        }
+    };
+
     request.open("POST", "/register");
     request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    request.responseType = "text";
     request.send(JSON.stringify({
         "email": email,
         "username": username,
         "password": password
     }));
 })
+
+function setErrorMessage(response) {
+    const error = document.getElementById("error");
+    const errorMessage = document.getElementById("error-content");
+    if (response.includes("username")) {
+        error.classList.remove("hide");
+        errorMessage.textContent = "The username is already taken !";
+    } else if (response.includes("email")) {
+        error.classList.remove("hide");
+        errorMessage.textContent = "The email is already taken !";
+    } else {
+        error.classList.add("hide");
+    }
+}

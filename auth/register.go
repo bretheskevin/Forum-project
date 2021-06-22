@@ -6,6 +6,7 @@ import (
 	"../utils/password"
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
+	"net/mail"
 	"time"
 )
 
@@ -32,7 +33,13 @@ func userExist(username string) bool {
 		fmt.Println("user not found, user with this username doesn't exit, you can create it")
 		return true
 	}
+
 	return false
+}
+
+func valid(email string) bool {
+	_, err := mail.ParseAddress(email)
+	return err == nil
 }
 
 func emailExist(email string) bool {
@@ -53,6 +60,10 @@ func emailExist(email string) bool {
 	}
 
 	defer rows.Close()
+
+	if !valid(email) {
+		return false
+	}
 
 	if !rows.Next() {
 		fmt.Println("user with this email doesn't exit, you can create it")
@@ -87,5 +98,13 @@ func Register(username string, email string, pass string) (bool, string) {
 		}
 		return true, token
 	}
+
+	if !newUserName {
+		return false, "name"
+	}
+	if !newUserEmail {
+		return false, "email"
+	}
+
 	return false, ""
 }
