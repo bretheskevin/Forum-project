@@ -1,6 +1,7 @@
 package main
 
 import (
+	"./api"
 	"./routes"
 	"./utils/database"
 	"fmt"
@@ -13,7 +14,7 @@ func main() {
 	db := database.Connect()
 	database.InitTable(db)
 
-	//api.Start()
+	api.Start()
 
 	// test create post
 	//post := models.Post{Title: "FirstArticle",Content: "Hello",PublisherID: 19,Category: "test"}
