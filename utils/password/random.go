@@ -1,6 +1,4 @@
-package util
-
-// Used for debugging
+package password
 
 import (
 	"math/rand"

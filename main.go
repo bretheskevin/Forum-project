@@ -1,35 +1,26 @@
 package main
 
 import (
+	"./routes"
+	"./utils/database"
 	"fmt"
 	"log"
 	"net/http"
-
-	"./routes"
 )
 
 func main() {
-	// db := database.OpenDB("database/forum.db")
-	// database.Init(db) // create the different tables
+	// connect to the db
+	db := database.Connect()
+	database.InitTable(db)
 
-	// post := structures.Post{
-	// 	Title:       "Les aventures de Kévin",
-	// 	Content:     "INCROYABLE !!!",
-	// 	PublisherID: 2,
-	// 	Category:    "Cybersecurity",
-	// }
-	// database.AddPost(db, post)
+	//api.Start()
 
-	// user := structures.User{
-	// 	Username:          "Kévin",
-	// 	Email:             "kevin.brethes@ynov.com",
-	// 	Password:          "Pa$$W0rD",
-	// 	ProfilePictureURL: "https://cdn.discordapp.com/attachments/508258795877564416/778390220650709002/20201018_192834.jpg",
-	// 	IsAdmin:           false,
-	// }
-	// database.AddUser(db, user)
-
-	// return
+	// test create post
+	//post := models.Post{Title: "FirstArticle",Content: "Hello",PublisherID: 19,Category: "test"}
+	//database.AddPost(db, post)
+	//posts := database.GetPosts()
+	//fmt.Println(posts)
+	//database.AddPost(models.Post{Title: "SecondArticle",Content: "Hello2"})
 
 	port := ":8080"
 
@@ -56,4 +47,5 @@ func main() {
 		log.Fatal(err)
 		return
 	}
+
 }

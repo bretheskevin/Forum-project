@@ -1,9 +1,13 @@
 package routes
 
 import (
+	"../auth"
+	"encoding/json"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
+	"time"
 )
 
 func HomePage(w http.ResponseWriter, r *http.Request) {
@@ -81,6 +85,26 @@ func LoginPage(w http.ResponseWriter, r *http.Request) {
 	if errorExecuteTemplate != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
+	}
+
+	if err := r.ParseForm(); err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	email := r.FormValue("email")
+	pass := r.FormValue("password")
+
+	login, token := auth.Login(email, pass)
+	if login == true {
+		res := "user log"
+		cookie := http.Cookie{Name: "token", Value: token, Expires: time.Now().Add(time.Minute * 60)}
+		http.SetCookie(w, &cookie)
+		json.NewEncoder(w).Encode(res)
+
+	} else {
+		res := "Wrong password or email"
+		json.NewEncoder(w).Encode(res)
 	}
 
 }

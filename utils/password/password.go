@@ -1,11 +1,10 @@
-package util
+package password
 
 import (
 	"fmt"
 	"golang.org/x/crypto/bcrypt"
 )
 
-// return bcrypt password hash
 func HashPassword(password string) (string, error) {
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
