@@ -30,11 +30,15 @@
                 <h1 class="txt-center font-s7 font-w900 mt-5 mb-5">Forum Project</h1>
             </div>
 
-            <form class="mr-5 ml-5" action="/login" method="post" id="login-form">
+            <div class="mr-5 ml-5" action="/login" method="post" id="login-form">
                 <div class="grix">
+                     <span class="d-flex vcenter ml-auto mr-auto txt-red txt-light-1 font-s4 font-w500 hide" id="error">
+                            <i class="mdi mdi-alert mr-1 mb-0 mt-1"></i>
+                            <p class="mb-0 mt-1">Email or password incorrect !</p>
+                        </span>
                     <div class="form-field">
                         <label for="email">Email</label>
-                        <input type="text" id="email" class="form-control rounded-2 pl-3 white txt-color" placeholder="contact@example.com" name="email" />
+                        <input type="text" id="email" class="form-control rounded-2 pl-3 white txt-color" placeholder="contact@example.com" />
 
                         <span class="d-flex vcenter txt-red txt-light-1 font-s1 font-w500 hide" id="invalid-email">
                             <i class="mdi mdi-alert mr-1 mb-0 mt-1"></i>
@@ -43,7 +47,7 @@
                     </div>
                     <div class="form-field">
                         <label for="password">Password</label>
-                        <input type="password" id="password" class="form-control rounded-2 pl-3 white txt-color" placeholder="HFR7f7dx*FqNGmz" name="password"/>
+                        <input type="password" id="password" class="form-control rounded-2 pl-3 white txt-color" placeholder="HFR7f7dx*FqNGmz"/>
                     </div>
 
                     <span class="d-flex vcenter txt-red txt-light-1 font-s1 font-w500 hide" id="password-short">
@@ -56,9 +60,9 @@
                     </span>
                 </div>
 
-                <button class="btn rounded-1 black w100 mt-4 rounded-2 pt-3 pb-3 mb-3 disabled" type="submit" form="login-form" value="Sign In" id="form-submit-btn">Sign In</button>
+                <button class="btn rounded-1 black w100 mt-4 rounded-2 pt-3 pb-3 mb-3 disabled" type="submit" value="Sign In" id="form-submit-login">Sign In</button>
 
-            </form>
+            </div>
         </div>
     </main>
 

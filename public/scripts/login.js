@@ -2,7 +2,7 @@ let validEmail = false;
 let validPassword = false;
 
 function isValid() {
-    const btn = document.getElementById("form-submit-btn");
+    const btn = document.getElementById("form-submit-login");
     if (validEmail && validPassword) {
         btn.classList.remove("disabled");
     } else {
@@ -63,4 +63,29 @@ password.addEventListener("input", () => {
     }
 
     isValid();
+})
+
+const submitBtn = document.getElementById("form-submit-login");
+submitBtn.addEventListener("click", () => {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            if (this.responseText.includes("Wrong")) {
+                document.getElementById("error").classList.remove("hide")
+            } else {
+                window.location.href = "/feed"
+            }
+        }
+    };
+
+    request.open("POST", "/login");
+    request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    request.responseType = "text";
+    request.send(JSON.stringify({
+        "email": email,
+        "password": password
+    }));
 })

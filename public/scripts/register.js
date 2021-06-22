@@ -3,7 +3,7 @@ let validUsername = false;
 let validPassword = false;
 
 function isValid() {
-    const btn = document.getElementById("form-submit-btn");
+    const btn = document.getElementById("form-submit-register");
     if (validEmail && validUsername && validPassword) {
         btn.classList.remove("disabled");
     } else {
@@ -89,7 +89,7 @@ username.addEventListener("input", () => {
 })
 
 
-const submitBtn = document.getElementById("form-submit-btn");
+const submitBtn = document.getElementById("form-submit-register");
 submitBtn.addEventListener("click", () => {
     const email = document.getElementById("email").value;
     const username = document.getElementById("username").value;
