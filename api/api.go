@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"time"
 )
@@ -81,12 +80,9 @@ func register(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func Start() {
-	router := mux.NewRouter()
+func Start(router *mux.Router) {
 	router.HandleFunc("/login", login).Methods("POST")
 	router.HandleFunc("/register", register).Methods("POST")
-	fmt.Println("app is working on port 3001")
-	log.Fatal(http.ListenAndServe(":3001", router))
 }
 
 /*

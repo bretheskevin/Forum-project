@@ -73,7 +73,7 @@ function validateUsername(username) {
     return re.test(String(username).toLowerCase());
 }
 
-const username = document.getElementById("name")
+const username = document.getElementById("username")
 username.value = "";
 const invalidUsername = document.getElementById("invalid-username");
 username.addEventListener("input", () => {
@@ -86,4 +86,21 @@ username.addEventListener("input", () => {
     }
 
     isValid();
+})
+
+
+const submitBtn = document.getElementById("form-submit-btn");
+submitBtn.addEventListener("click", () => {
+    const email = document.getElementById("email").value;
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    const request = new XMLHttpRequest();
+    request.open("POST", "/register");
+    request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    request.send(JSON.stringify({
+        "email": email,
+        "username": username,
+        "password": password
+    }));
 })

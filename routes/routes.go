@@ -1,16 +1,13 @@
 package routes
 
 import (
-	"../auth"
-	"encoding/json"
-	"fmt"
+	"github.com/gorilla/mux"
 	"html/template"
 	"log"
 	"net/http"
-	"time"
 )
 
-func HomePage(w http.ResponseWriter, r *http.Request) {
+func homePage(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" && r.URL.Path != "/homepage" {
 		errorHandler(w, r)
 		return
@@ -27,7 +24,7 @@ func HomePage(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func FeedPage(w http.ResponseWriter, r *http.Request) {
+func feedPage(w http.ResponseWriter, r *http.Request) {
 	page, err := template.ParseFiles("public/feed.html")
 	if err != nil {
 		log.Fatal(err)
@@ -39,7 +36,7 @@ func FeedPage(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func DashboardPage(w http.ResponseWriter, r *http.Request) {
+func dashboardPage(w http.ResponseWriter, r *http.Request) {
 	page, err := template.ParseFiles("public/dashboard.html")
 	if err != nil {
 		log.Fatal(err)
@@ -51,7 +48,7 @@ func DashboardPage(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func DashboardPostsPage(w http.ResponseWriter, r *http.Request) {
+func dashboardPostsPage(w http.ResponseWriter, r *http.Request) {
 	page, err := template.ParseFiles("public/dashboard-posts.html")
 	if err != nil {
 		log.Fatal(err)
@@ -63,7 +60,7 @@ func DashboardPostsPage(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func RegisterPage(w http.ResponseWriter, r *http.Request) {
+func registerPage(w http.ResponseWriter, r *http.Request) {
 	page, err := template.ParseFiles("public/register.html")
 	if err != nil {
 		log.Fatal(err)
@@ -75,7 +72,7 @@ func RegisterPage(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func LoginPage(w http.ResponseWriter, r *http.Request) {
+func loginPage(w http.ResponseWriter, r *http.Request) {
 
 	page, err := template.ParseFiles("public/login.html")
 	if err != nil {
@@ -87,29 +84,9 @@ func LoginPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := r.ParseForm(); err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	email := r.FormValue("email")
-	pass := r.FormValue("password")
-
-	login, token := auth.Login(email, pass)
-	if login == true {
-		res := "user log"
-		cookie := http.Cookie{Name: "token", Value: token, Expires: time.Now().Add(time.Minute * 60)}
-		http.SetCookie(w, &cookie)
-		json.NewEncoder(w).Encode(res)
-
-	} else {
-		res := "Wrong password or email"
-		json.NewEncoder(w).Encode(res)
-	}
-
 }
 
-func CreateTopic(w http.ResponseWriter, r *http.Request) {
+func createTopic(w http.ResponseWriter, r *http.Request) {
 	page, err := template.ParseFiles("public/new-topic.html")
 	if err != nil {
 		log.Fatal(err)
@@ -134,4 +111,16 @@ func errorHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+}
+
+func Start(router *mux.Router) {
+	//This method takes the URL path and a function that will show the page
+	router.HandleFunc("/", homePage).Methods("GET")
+	router.HandleFunc("/homepage", homePage).Methods("GET")
+	router.HandleFunc("/feed", feedPage).Methods("GET")
+	router.HandleFunc("/dashboard/", dashboardPage).Methods("GET")
+	router.HandleFunc("/dashboard/posts", dashboardPostsPage).Methods("GET")
+	router.HandleFunc("/register", registerPage).Methods("GET")
+	router.HandleFunc("/login", loginPage).Methods("GET")
+	router.HandleFunc("/create-new-topic", createTopic).Methods("GET")
 }
