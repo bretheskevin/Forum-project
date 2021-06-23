@@ -110,6 +110,16 @@ submitBtn.addEventListener("click", () => {
         "username": username,
         "password": password
     }));
+
+
+    // change the color of the btn
+    submitBtn.classList.remove("black");
+    submitBtn.classList.add("grey");
+    setTimeout((() => {
+            submitBtn.classList.remove("grey")
+            submitBtn.classList.add("black")
+        }),
+        100)
 })
 
 function setErrorMessage(response) {
@@ -122,6 +132,7 @@ function setErrorMessage(response) {
         error.classList.remove("hide");
         errorMessage.textContent = "The email is already taken !";
     } else {
-        error.classList.add("hide");
+        window.location.href = "/feed"
     }
+
 }
