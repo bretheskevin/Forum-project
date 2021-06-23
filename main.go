@@ -23,10 +23,10 @@ func main() {
 	routes.Start(router)
 
 	// test
-	//test.CreateAccount()
+	test.CreateAccount()
 	//users := database.GetUsers()
 	//fmt.Println(users)
-	test.CreatePosts()
+	//test.CreatePosts()
 	//posts := database.GetPosts()
 	//fmt.Println(posts)
 	//post, exist := database.GetPost(10)
