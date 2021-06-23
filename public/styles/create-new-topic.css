@@ -1,0 +1,13 @@
+.upload-image-color {
+    color: #2B3F92;
+}
+
+.upload-image-bg {
+    background-color: rgba(97, 125, 188, 0.3);
+}
+
+#form-submit-btn {
+    position: relative;
+    top: 50px;
+    padding: 4rem 4rem;
+}
