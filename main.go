@@ -21,6 +21,13 @@ func main() {
 	api.Start(router)
 	routes.Start(router)
 
+	// test
+	//test.CreatePosts()
+	//posts := database.GetPosts()
+	//fmt.Println(posts)
+	//post, exist := database.GetPost(1)
+	//fmt.Println(post,exist)
+
 	// allow the server to access to the files
 
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./public/")))

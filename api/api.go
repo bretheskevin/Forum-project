@@ -21,15 +21,11 @@ type Register struct {
 	Password string
 }
 
+type Post struct {
+	ID string
+}
+
 func login(w http.ResponseWriter, r *http.Request) {
-	/*
-		if err := r.ParseForm(); err != nil {
-			fmt.Println(err)
-			return
-		}
-		email := r.FormValue("email")
-		pass := r.FormValue("password")
-	*/
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		fmt.Println(err)
@@ -87,19 +83,19 @@ func register(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func getPost(w http.ResponseWriter, r *http.Request) {
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Println(err)
+	}
+	var formattedBody Post
+	err = json.Unmarshal(body, &formattedBody)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+}
 func Start(router *mux.Router) {
 	router.HandleFunc("/login", login).Methods("POST")
 	router.HandleFunc("/register", register).Methods("POST")
 }
-
-/*
-body, err := ioutil.ReadAll(r.Body)
-if err != nil {
-fmt.Println(err)
-}
-
-var formattedBody Login
-err = json.Unmarshal(body, &formattedBody)
-if err != nil {
-fmt.Println(err)
-}*/

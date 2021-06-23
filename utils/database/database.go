@@ -74,6 +74,41 @@ func GetPosts() []models.Post {
 	return posts
 }
 
+func GetPost(ID int) (models.Post, bool) {
+	db := Connect()
+	post := models.Post{}
+	defer db.Close()
+	stmt, err := db.Prepare("SELECT * FROM posts WHERE id=?")
+
+	if err != nil {
+		fmt.Println(err)
+		return post, false
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Query(ID)
+	if err != nil {
+		fmt.Println(err)
+		return post, false
+	}
+
+	defer rows.Close()
+
+	var id int
+	var content string
+	var title string
+	var publisherID int
+	var category string
+
+	if rows.Next() {
+		rows.Scan(&id, &title, &content, &publisherID, &category)
+		post = models.Post{ID: id, Title: title, Content: content, PublisherID: publisherID, Category: category}
+		return post, true
+	}
+	return post, false
+
+}
+
 func InitTable(db *sql.DB) {
 	UserTable(db)
 	PostTable(db)
