@@ -10,7 +10,6 @@ type User struct {
 	Password          string
 	ProfilePictureURL string
 	IsAdmin           bool
-	Post              []Post
 }
 
 type Post struct {
