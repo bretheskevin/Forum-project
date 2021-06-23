@@ -8,6 +8,7 @@ import (
 	"github.com/gorilla/mux"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -85,18 +86,14 @@ func register(w http.ResponseWriter, r *http.Request) {
 }
 
 func getPost(w http.ResponseWriter, r *http.Request) {
-	body, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		fmt.Println(err)
-	}
-	var formattedBody Post
-	err = json.Unmarshal(body, &formattedBody)
-	if err != nil {
-		fmt.Println(err)
-	}
+	vars := mux.Vars(r)
+	key, _ := vars["id"]
+	id, _ := strconv.Atoi(key)
+	post, _ := database.GetPost(id)
+	jsonFormat, _ := json.Marshal(post)
 
-	res, _ := database.GetPost(formattedBody.ID)
-	json.NewEncoder(w).Encode(res)
+	w.Header().Set("content-type", "application/json")
+	w.Write(jsonFormat)
 
 }
 
@@ -107,8 +104,49 @@ func getPosts(w http.ResponseWriter, r *http.Request) {
 	w.Write(res)
 }
 
+func getPostsByCategory(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	category, _ := vars["category"]
+	posts := database.GetPostsByCategory(category)
+	jsonFormat, _ := json.Marshal(posts)
+	w.Header().Set("content-type", "application/json")
+	w.Write(jsonFormat)
+}
+
+func getPostsByPublisher(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	publisherID, _ := strconv.Atoi(vars["id"])
+	posts := database.GetPostsByPublisher(publisherID)
+	jsonFormat, _ := json.Marshal(posts)
+	w.Header().Set("content-type", "application/json")
+	w.Write(jsonFormat)
+}
+
+func getUsers(w http.ResponseWriter, r *http.Request) {
+	users := database.GetUsers()
+	res, _ := json.Marshal(users)
+	w.Header().Set("content-type", "application/json")
+	w.Write(res)
+}
+
+func getUser(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	key, _ := vars["id"]
+	id, _ := strconv.Atoi(key)
+	post, _ := database.GetUser(id)
+	jsonFormat, _ := json.Marshal(post)
+
+	w.Header().Set("content-type", "application/json")
+	w.Write(jsonFormat)
+}
+
 func Start(router *mux.Router) {
 	router.HandleFunc("/login", login).Methods("POST")
 	router.HandleFunc("/register", register).Methods("POST")
+	router.HandleFunc("/post/{id}", getPost).Methods("GET")
 	router.HandleFunc("/posts", getPosts).Methods("GET")
+	router.HandleFunc("/users", getUsers).Methods("GET")
+	router.HandleFunc("/user/{id}", getUser).Methods("GET")
+	router.HandleFunc("/posts/{category}", getPostsByCategory).Methods("GET")
+	router.HandleFunc("/posts/user/{id}", getPostsByPublisher).Methods("GET")
 }

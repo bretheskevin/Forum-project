@@ -23,4 +23,8 @@
 - [ ] &nbsp; (#14) Login and register
 - [ ] &nbsp; (#15) Sessions / Cookies
 
-
+## Today
+- [x] getUser()
+- [x] getUsers()
+- [x] getPost()
+- [x] getPosts()

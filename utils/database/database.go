@@ -131,14 +131,131 @@ func AddPost(database *sql.DB, post models.Post) {
 
 func AddUser(database *sql.DB, user models.User) {
 	stmt, err := database.Prepare(`
-		INSERT INTO users (username,email,password, profile_picture_url, admin)
-		VALUES(?, ?, ?, ?)
+		INSERT INTO users (username,email,password,profile_picture_url , admin)
+		VALUES(?, ?, ?, ? ,?)
 	`)
 	if err != nil {
 		log.Fatalln(err)
 		return
 	}
-	default_pp := "/"
-	stmt.Exec(user.UserName, user.Email, user.Password, default_pp, false)
+	stmt.Exec(user.UserName, user.Email, user.Password, "/images/default-pp.jpg", false)
 	fmt.Println("User " + user.UserName + " added !")
+}
+
+func GetUser(ID int) (models.User, bool) {
+	db := Connect()
+	user := models.User{}
+	defer db.Close()
+	stmt, err := db.Prepare("SELECT id,username,email FROM users WHERE id=?")
+
+	if err != nil {
+		fmt.Println(err)
+		return user, false
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Query(ID)
+	if err != nil {
+		fmt.Println(err)
+		return user, false
+	}
+
+	defer rows.Close()
+
+	var id int
+	var username string
+	var email string
+
+	if rows.Next() {
+		rows.Scan(&id, &username, &email)
+		user = models.User{ID: id, UserName: username, Email: email, Password: "secret"}
+		return user, true
+	}
+	return user, false
+}
+
+func GetUsers() []models.User {
+	db := Connect()
+	users := []models.User{}
+	rows, _ := db.Query(
+		`SELECT id,username,email FROM users`)
+	var id int
+	var username string
+	var email string
+
+	for rows.Next() {
+		rows.Scan(&id, &username, &email)
+		users = append(users, models.User{
+			ID:       id,
+			UserName: username,
+			Email:    email,
+		})
+	}
+	return users
+}
+
+func GetPostsByCategory(Category string) []models.Post {
+	db := Connect()
+	posts := []models.Post{}
+	defer db.Close()
+	stmt, err := db.Prepare("SELECT * FROM posts WHERE category=?")
+
+	rows, err := stmt.Query(Category)
+	if err != nil {
+		fmt.Println(err)
+		return posts
+	}
+
+	defer rows.Close()
+
+	var id int
+	var content string
+	var title string
+	var publisherID int
+	var category string
+
+	for rows.Next() {
+		rows.Scan(&id, &title, &content, &publisherID, &category)
+		posts = append(posts, models.Post{
+			ID:          id,
+			Title:       title,
+			Content:     content,
+			PublisherID: publisherID,
+			Category:    category,
+		})
+	}
+	return posts
+}
+
+func GetPostsByPublisher(PublisherID int) []models.Post {
+	db := Connect()
+	posts := []models.Post{}
+	defer db.Close()
+	stmt, err := db.Prepare("SELECT * FROM posts WHERE publisher_id=?")
+
+	rows, err := stmt.Query(PublisherID)
+	if err != nil {
+		fmt.Println(err)
+		return posts
+	}
+
+	defer rows.Close()
+
+	var id int
+	var content string
+	var title string
+	var publisherID int
+	var category string
+
+	for rows.Next() {
+		rows.Scan(&id, &title, &content, &publisherID, &category)
+		posts = append(posts, models.Post{
+			ID:          id,
+			Title:       title,
+			Content:     content,
+			PublisherID: publisherID,
+			Category:    category,
+		})
+	}
+	return posts
 }
