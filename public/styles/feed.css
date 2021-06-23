@@ -1,0 +1,51 @@
+:root {
+    --primary: #3E46F1;
+    --txt-primary: #2B3F92;
+    --secondary: #617DBC;
+}
+
+body {
+    background: linear-gradient(#EEC0C6, #7EE8FA);
+}
+
+li {
+    list-style: none;
+}
+
+.circle-icon {
+    background-color: rgb(236, 233, 233);
+    border-color: rgb(194, 192, 192);
+    width: 1.7rem;
+}
+
+#top-members li {
+    font-weight: 600;
+}
+
+#new-topic {
+    width: 15rem;
+}
+
+#nb-of-posts {
+    max-height: 40px;
+}
+
+.bg-primary {
+    background-color: var(--primary);
+}
+
+.text-primary {
+    color: var(--txt-primary);
+}
+
+.bg-secondary {
+    background-color: var(--secondary);
+}
+
+#underline {
+    text-decoration: underline;
+}
+
+.cards-color {
+    background-color: #F4F5F9;
+}
