@@ -15,13 +15,14 @@
 
 ## Server
 
-- [ ] &nbsp; (#3) Public API
+- [x] &nbsp; (#3) Public API
 - [ ] &nbsp; (#4) Private API
 - [x] &nbsp; (#5) Database
 - [x] &nbsp; (#8) Routes
 - [x] &nbsp; (#11) Bcrypt
-- [ ] &nbsp; (#14) Login and register
-- [ ] &nbsp; (#15) Sessions / Cookies
+- [x] &nbsp; (#14) Login and register
+- [x] &nbsp; (#15) Sessions / Cookies
+- [x] &nbsp; (#16) Search by ID / Category
 
 ## Today
 - [x] getUser()
