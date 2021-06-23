@@ -18,7 +18,7 @@ const commentsSvg = "<svg width=\"30\" height=\"30\" viewBox=\"0 0 21 19\" fill=
     "                                <path d=\"M3.0567 18.4905H1.56871L2.6209 17.4383C3.18823 16.871 3.54251 16.1331 3.63776 15.3326C2.15732 14.3611 1.07476 13.0829 0.495268 11.6171C-0.0838141 10.1523 -0.156585 8.53992 0.284846 6.95409C0.814497 5.05125 2.05677 3.31687 3.78276 2.07041C5.65836 0.715953 7.99326 0 10.5351 0C13.7371 0 16.4361 0.919966 18.3401 2.66038C20.0553 4.22833 21 6.34328 21 8.61569C21 9.7197 20.7752 10.7939 20.3319 11.8085C19.8731 12.8584 19.2013 13.7932 18.3352 14.587C16.4286 16.3343 13.7314 17.2578 10.5351 17.2578C9.3485 17.2578 8.11033 17.0994 7.00488 16.8088C5.95852 17.8822 4.54063 18.4905 3.0567 18.4905ZM10.5351 1.2327C5.43832 1.2327 2.31092 4.27226 1.47239 7.28466C0.680009 10.1314 1.84808 12.8213 4.597 14.4801L4.90415 14.6655L4.8947 15.0241C4.87596 15.7339 4.70676 16.4175 4.40388 17.0355C5.14141 16.786 5.81064 16.3336 6.3347 15.7144L6.5953 15.4066L6.98175 15.5221C8.06624 15.8465 9.32816 16.0251 10.5351 16.0251C16.8783 16.0251 19.7673 12.1843 19.7673 8.61569C19.7673 6.69366 18.9651 4.9018 17.5083 3.57024C15.8354 2.04103 13.4241 1.2327 10.5351 1.2327Z\" fill=\"#C4C4C4\"/>\n" +
     "                                </svg>"
 
-function createPost(postContent) {
+async function createPost(postContent) {
     const post = document.createElement("div");
     addClasses(post, [
         "card",
@@ -29,9 +29,9 @@ function createPost(postContent) {
         "mb-5",
     ])
 
-    post.appendChild(createHeader(postContent));
-    post.appendChild(createContent(postContent));
-    post.appendChild(createFooter(postContent));
+    post.appendChild(await createHeader(postContent));
+    post.appendChild(await createContent(postContent));
+    post.appendChild(await createFooter(postContent));
 
     return post
 }
@@ -42,7 +42,13 @@ function addClasses(element, classes) {
     }
 }
 
-function createHeader(postContent) {
+async function createHeader(postContent) {
+    const publisherId = postContent["PublisherID"];
+    const url = "/user/" + publisherId
+
+    const res = await fetch(url);
+    const user = await res.json()
+
     const header = document.createElement("div");
     addClasses(header, [
         "card-header",
@@ -52,9 +58,8 @@ function createHeader(postContent) {
         "pb-2",
     ])
 
-    // INSERT USER IMAGE URL FROM API
     const img = document.createElement("img");
-    img.src = "/images/default-pp.jpg";
+    img.src = user.ProfilePictureURL;
     img.alt = "";
     img.width = 40;
     img.height = 40;
@@ -65,14 +70,13 @@ function createHeader(postContent) {
     header.appendChild(img);
 
 
-    // INSERT USER NAME FROM API
     const name = document.createElement("p");
     addClasses(name, [
         "txt-grey",
         "txt-dark-3",
         "font-s2",
     ])
-    const username = "Kévin";
+    const username = user["UserName"];
     name.textContent = "Posted by " + username
     header.appendChild(name);
 
@@ -91,7 +95,7 @@ function createHeader(postContent) {
     return header;
 }
 
-function createContent(postContent) {
+async function createContent(postContent) {
     const content = document.createElement("div");
     addClasses(content, [
         "card-content",
@@ -101,8 +105,7 @@ function createContent(postContent) {
     // INSERT TITLE FROM API
     const title = document.createElement("h1");
     title.classList.add("font-s3");
-    const titleContent = "How to build your own computer";
-    title.textContent = titleContent;
+    title.textContent = postContent.Title;
     content.appendChild(title);
 
 
@@ -113,8 +116,7 @@ function createContent(postContent) {
         "txt-dark-5",
         "contents",
     ])
-    const cardContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non veritatis excepturi natus impedit distinctio quidem, nesciunt id possimus quia, tempore fuga doloribus reiciendis facilis voluptate accusantium! Adipisci est nam soluta! Lorem ipsum dolor sit amet consectetur adipisicing elit. Non veritatis excepturi natus impedit distinctio quidem, nesciunt id possimus quia, tempore fuga doloribus reiciendis facilis voluptate accusantium! Adipisci est nam soluta!"
-    text.textContent = cardContent;
+    text.textContent = postContent["Content"];
     content.appendChild(text);
 
     return content;
@@ -241,21 +243,15 @@ function addCommentsToFooter(footer) {
 }
 
 
-const request = new XMLHttpRequest();
-let postsList = [];
-
-request.onreadystatechange = function() {
-    if (this.readyState === 4 && this.status === 200) {
-        postsList = this.response
-        for (let post of postsList) {
-            const postToAdd = createPost(post);
-            postsContainer.appendChild(postToAdd);
-        }
-        likeAndDislike()
-        minify();
+async function main() {
+    const res = await fetch("/posts")
+    const postsList = await res.json();
+    for (let post of postsList) {
+        const postToAdd = await createPost(post);
+        postsContainer.appendChild(postToAdd);
     }
-};
+    likeAndDislike()
+    minify();
+}
 
-request.open("GET", "/posts");
-request.responseType = "json";
-request.send();
+main()

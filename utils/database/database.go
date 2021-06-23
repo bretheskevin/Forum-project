@@ -24,7 +24,7 @@ func UserTable(db *sql.DB) {
 		"email"	TEXT NOT NULL UNIQUE,
 		"password"	INTEGER NOT NULL,
 		"profile_picture_url"	TEXT NOT NULL,
-		"admin"	BOOLEAN NOT NULL,
+		"is_admin"	BOOLEAN NOT NULL,
 		PRIMARY KEY("id" AUTOINCREMENT)
 		);
 	`)
@@ -131,7 +131,7 @@ func AddPost(database *sql.DB, post models.Post) {
 
 func AddUser(database *sql.DB, user models.User) {
 	stmt, err := database.Prepare(`
-		INSERT INTO users (username,email,password,profile_picture_url , admin)
+		INSERT INTO users (username,email,password,profile_picture_url , is_admin)
 		VALUES(?, ?, ?, ? ,?)
 	`)
 	if err != nil {
@@ -145,14 +145,24 @@ func AddUser(database *sql.DB, user models.User) {
 func GetUser(ID int) (models.User, bool) {
 	db := Connect()
 	user := models.User{}
-	defer db.Close()
-	stmt, err := db.Prepare("SELECT id,username,email FROM users WHERE id=?")
+	defer func(db *sql.DB) {
+		err := db.Close()
+		if err != nil {
+			log.Fatalln(err)
+		}
+	}(db)
+	stmt, err := db.Prepare("SELECT id,username,email,profile_picture_url,is_admin FROM users WHERE id=?")
 
 	if err != nil {
 		fmt.Println(err)
 		return user, false
 	}
-	defer stmt.Close()
+	defer func(stmt *sql.Stmt) {
+		err := stmt.Close()
+		if err != nil {
+			log.Fatalln(err)
+		}
+	}(stmt)
 
 	rows, err := stmt.Query(ID)
 	if err != nil {
@@ -160,15 +170,32 @@ func GetUser(ID int) (models.User, bool) {
 		return user, false
 	}
 
-	defer rows.Close()
+	defer func(rows *sql.Rows) {
+		err := rows.Close()
+		if err != nil {
+			log.Fatalln(err)
+		}
+	}(rows)
 
 	var id int
 	var username string
 	var email string
+	var profilePictureUrl string
+	var isAdmin bool
 
 	if rows.Next() {
-		rows.Scan(&id, &username, &email)
-		user = models.User{ID: id, UserName: username, Email: email, Password: "secret"}
+		err := rows.Scan(&id, &username, &email, &profilePictureUrl, &isAdmin)
+		if err != nil {
+			return models.User{}, false
+		}
+		user = models.User{
+			ID:                id,
+			UserName:          username,
+			Email:             email,
+			Password:          "secret",
+			ProfilePictureURL: profilePictureUrl,
+			IsAdmin:           isAdmin,
+		}
 		return user, true
 	}
 	return user, false
@@ -176,19 +203,27 @@ func GetUser(ID int) (models.User, bool) {
 
 func GetUsers() []models.User {
 	db := Connect()
-	users := []models.User{}
+	var users []models.User
 	rows, _ := db.Query(
-		`SELECT id,username,email FROM users`)
+		`SELECT id,username,email,profile_picture_url,is_admin FROM users`)
 	var id int
 	var username string
 	var email string
+	var profilePictureUrl string
+	var isAdmin bool
 
 	for rows.Next() {
-		rows.Scan(&id, &username, &email)
+		err := rows.Scan(&id, &username, &email, &profilePictureUrl, &isAdmin)
+		if err != nil {
+			return nil
+		}
 		users = append(users, models.User{
-			ID:       id,
-			UserName: username,
-			Email:    email,
+			ID:                id,
+			UserName:          username,
+			Email:             email,
+			Password:          "secret",
+			ProfilePictureURL: profilePictureUrl,
+			IsAdmin:           isAdmin,
 		})
 	}
 	return users
@@ -197,7 +232,12 @@ func GetUsers() []models.User {
 func GetPostsByCategory(Category string) []models.Post {
 	db := Connect()
 	posts := []models.Post{}
-	defer db.Close()
+	defer func(db *sql.DB) {
+		err := db.Close()
+		if err != nil {
+			log.Fatalln(err)
+		}
+	}(db)
 	stmt, err := db.Prepare("SELECT * FROM posts WHERE category=?")
 
 	rows, err := stmt.Query(Category)
@@ -206,7 +246,12 @@ func GetPostsByCategory(Category string) []models.Post {
 		return posts
 	}
 
-	defer rows.Close()
+	defer func(rows *sql.Rows) {
+		err := rows.Close()
+		if err != nil {
+			log.Fatalln(err)
+		}
+	}(rows)
 
 	var id int
 	var content string
@@ -215,7 +260,10 @@ func GetPostsByCategory(Category string) []models.Post {
 	var category string
 
 	for rows.Next() {
-		rows.Scan(&id, &title, &content, &publisherID, &category)
+		err := rows.Scan(&id, &title, &content, &publisherID, &category)
+		if err != nil {
+			return nil
+		}
 		posts = append(posts, models.Post{
 			ID:          id,
 			Title:       title,
@@ -230,7 +278,12 @@ func GetPostsByCategory(Category string) []models.Post {
 func GetPostsByPublisher(PublisherID int) []models.Post {
 	db := Connect()
 	posts := []models.Post{}
-	defer db.Close()
+	defer func(db *sql.DB) {
+		err := db.Close()
+		if err != nil {
+			log.Fatalln(err)
+		}
+	}(db)
 	stmt, err := db.Prepare("SELECT * FROM posts WHERE publisher_id=?")
 
 	rows, err := stmt.Query(PublisherID)
@@ -248,7 +301,10 @@ func GetPostsByPublisher(PublisherID int) []models.Post {
 	var category string
 
 	for rows.Next() {
-		rows.Scan(&id, &title, &content, &publisherID, &category)
+		err := rows.Scan(&id, &title, &content, &publisherID, &category)
+		if err != nil {
+			return nil
+		}
 		posts = append(posts, models.Post{
 			ID:          id,
 			Title:       title,
