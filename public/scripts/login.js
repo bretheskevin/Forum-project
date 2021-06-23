@@ -84,4 +84,14 @@ submitBtn.addEventListener("click", () => {
         "email": email,
         "password": password
     }));
+
+
+    // change the color of the btn
+    submitBtn.classList.remove("black");
+    submitBtn.classList.add("grey");
+    setTimeout((() => {
+        submitBtn.classList.remove("grey")
+        submitBtn.classList.add("black")
+    }),
+        100)
 })
