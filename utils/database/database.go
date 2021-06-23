@@ -20,10 +20,12 @@ func UserTable(db *sql.DB) {
 	stmt, err := db.Prepare(`
 		CREATE TABLE IF NOT EXISTS "users" (
 		"id"	INTEGER NOT NULL UNIQUE,
-		"username"	TEXT NOT NULL,
-		"email"	TEXT NOT NULL,
+		"username"	TEXT NOT NULL UNIQUE,
+		"email"	TEXT NOT NULL UNIQUE,
 		"password"	INTEGER NOT NULL,
-		PRIMARY KEY("ID" AUTOINCREMENT)
+		"profile_picture_url"	TEXT NOT NULL,
+		"admin"	BOOLEAN NOT NULL,
+		PRIMARY KEY("id" AUTOINCREMENT)
 		);
 	`)
 	if err != nil {
@@ -94,13 +96,14 @@ func AddPost(database *sql.DB, post models.Post) {
 
 func AddUser(database *sql.DB, user models.User) {
 	stmt, err := database.Prepare(`
-		INSERT INTO users (username,email,password)
-		VALUES(?, ?, ?)
+		INSERT INTO users (username,email,password, profile_picture_url, admin)
+		VALUES(?, ?, ?, ?)
 	`)
 	if err != nil {
 		log.Fatalln(err)
 		return
 	}
-	stmt.Exec(user.UserName, user.Email, user.Password)
+	default_pp := "/"
+	stmt.Exec(user.UserName, user.Email, user.Password, default_pp, false)
 	fmt.Println("User " + user.UserName + " added !")
 }
