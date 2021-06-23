@@ -25,7 +25,7 @@ func main() {
 	//test.CreatePosts()
 	//posts := database.GetPosts()
 	//fmt.Println(posts)
-	//post, exist := database.GetPost(1)
+	//post, exist := database.GetPost(10)
 	//fmt.Println(post,exist)
 
 	// allow the server to access to the files

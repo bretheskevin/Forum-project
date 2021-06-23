@@ -2,6 +2,7 @@ package api
 
 import (
 	"../auth"
+	"../utils/database"
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
@@ -22,7 +23,7 @@ type Register struct {
 }
 
 type Post struct {
-	ID string
+	ID int
 }
 
 func login(w http.ResponseWriter, r *http.Request) {
@@ -94,8 +95,20 @@ func getPost(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 
+	res, _ := database.GetPost(formattedBody.ID)
+	json.NewEncoder(w).Encode(res)
+
 }
+
+func getPosts(w http.ResponseWriter, r *http.Request) {
+	posts := database.GetPosts()
+	res, _ := json.Marshal(posts)
+	w.Header().Set("content-type", "application/json")
+	w.Write(res)
+}
+
 func Start(router *mux.Router) {
 	router.HandleFunc("/login", login).Methods("POST")
 	router.HandleFunc("/register", register).Methods("POST")
+	router.HandleFunc("/posts", getPosts).Methods("GET")
 }
