@@ -21,4 +21,10 @@
 - [x] &nbsp; (#8) Routes
 - [x] &nbsp; (#11) Bcrypt
 - [ ] &nbsp; (#14) Login and register
+- [ ] &nbsp; (#15) Sessions / Cookies
 
+## Today
+- [x] getUser()
+- [x] getUsers()
+- [x] getPost()
+- [x] getPosts()
