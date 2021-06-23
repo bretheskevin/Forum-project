@@ -1,52 +1,40 @@
 package main
 
 import (
+	"./api"
+	"./routes"
+	"./utils/database"
 	"fmt"
-	"html/template"
+	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 )
 
-func homePage(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		//set the status code to 404
-		w.WriteHeader(http.StatusNotFound)
-
-		page, errorParseFiles := template.ParseFiles("public/not-found.html")
-		if errorParseFiles != nil {
-			log.Fatal(errorParseFiles)
-		}
-
-		errorExecuteTemplate := page.ExecuteTemplate(w, "error.html", "")
-		if errorExecuteTemplate != nil {
-			return
-		}
-	} else {
-		page, err := template.ParseFiles("public/index.html")
-		if err != nil {
-			log.Fatal(err)
-		}
-		errorExecuteTemplate := page.ExecuteTemplate(w, "index.html", "")
-		if errorExecuteTemplate != nil {
-			return
-		}
-	}
-}
-
 func main() {
 	port := ":8080"
 
-	// allow the server to access to the files
-	http.Handle("/public/", http.StripPrefix("/public/", http.FileServer(http.Dir("public/"))))
+	// connect to the db
+	db := database.Connect()
+	database.InitTable(db)
 
-	//This method takes the URL path and a function that will show the page
-	http.HandleFunc("/", homePage)
+	router := mux.NewRouter()
+	api.Start(router)
+	routes.Start(router)
+
+	// allow the server to access to the files
+
+	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./public/")))
+	//http.Handle("/public/", http.StripPrefix("/public/", http.FileServer(http.Dir("public/"))))
+	//http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("public/images"))))
+	//http.Handle("/scripts/", http.StripPrefix("/scripts/", http.FileServer(http.Dir("public/scripts"))))
+	//http.Handle("/styles/", http.StripPrefix("/styles/", http.FileServer(http.Dir("public/styles"))))
 
 	//start the server and use fmt to print the errors
 	fmt.Println("Listening on http://localhost" + port)
-	err := http.ListenAndServe(port, nil)
+	err := http.ListenAndServe(port, router)
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
+
 }
