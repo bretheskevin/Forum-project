@@ -56,11 +56,7 @@ password.addEventListener("input", () => {
         passwordLong.classList.add("hide");
     }
 
-    if (password.value.length >= 8 && password.value.length <= 30) {
-        validPassword = true;
-    } else {
-        validPassword = false;
-    }
+    validPassword = password.value.length >= 8 && password.value.length <= 30;
 
     isValid();
 })

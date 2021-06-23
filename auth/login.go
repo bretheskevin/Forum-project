@@ -36,7 +36,7 @@ func Login(email string, pass string) (bool, string) {
 	}
 
 	user := models.User{}
-	if err = rows.Scan(&user.ID, &user.UserName, &user.Email, &user.Password); err != nil {
+	if err = rows.Scan(&user.ID, &user.UserName, &user.Email, &user.Password, &user.ProfilePictureURL, &user.IsAdmin); err != nil {
 		fmt.Println(err)
 		return false, ""
 	}

@@ -50,8 +50,8 @@ function createHeader() {
 
     // INSERT USER IMAGE URL FROM API
     const img = document.createElement("img");
-    img.src = "https://cdn.discordapp.com/attachments/508258795877564416/778390220650709002/20201018_192834.jpg";
-    img.alt = "Profile Picture";
+    img.src = "/images/default-pp.jpg";
+    img.alt = "";
     img.width = 40;
     img.height = 40;
     addClasses(img, [
