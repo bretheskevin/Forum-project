@@ -8,6 +8,7 @@ import (
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+	"./test"
 )
 
 func main() {
@@ -25,7 +26,7 @@ func main() {
 	//test.CreateAccount()
 	//users := database.GetUsers()
 	//fmt.Println(users)
-	//test.CreatePosts()
+	test.CreatePosts()
 	//posts := database.GetPosts()
 	//fmt.Println(posts)
 	//post, exist := database.GetPost(10)
