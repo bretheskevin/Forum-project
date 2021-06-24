@@ -8,11 +8,15 @@ import (
 	"log"
 )
 
+func checkErr(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
+
 func Connect() *sql.DB {
 	db, err := sql.Open("sqlite3", "utils/database/data.db")
-	if err != nil {
-		log.Fatalln(err)
-	}
+	checkErr(err)
 	return db
 }
 
@@ -28,9 +32,7 @@ func UserTable(db *sql.DB) {
 		PRIMARY KEY("id" AUTOINCREMENT)
 		);
 	`)
-	if err != nil {
-		log.Fatalln(err)
-	}
+	checkErr(err)
 	stmt.Exec()
 }
 
@@ -45,9 +47,7 @@ func PostTable(db *sql.DB) {
 			PRIMARY KEY("ID" AUTOINCREMENT)
 		);
 	`)
-	if err != nil {
-		log.Fatalln(err)
-	}
+	checkErr(err)
 
 	stmt.Exec()
 }
@@ -314,4 +314,79 @@ func GetPostsByPublisher(PublisherID int) []models.Post {
 		})
 	}
 	return posts
+}
+
+func DeleteUser(ID int) bool {
+	db := Connect()
+	DeletePostByPublisher(ID)
+	stmt, err := db.Prepare("DELETE FROM users WHERE id = ?")
+	checkErr(err)
+	result, errExec := stmt.Exec(ID)
+	checkErr(errExec)
+	rowAffected, errRow := result.RowsAffected()
+	checkErr(errRow)
+	if rowAffected != 0 {
+		return true
+	}
+	return false
+}
+
+func DeletePost(ID int) bool {
+	db := Connect()
+	stmt, err := db.Prepare("DELETE FROM posts WHERE id = ?")
+	checkErr(err)
+	result, errExec := stmt.Exec(ID)
+	checkErr(errExec)
+	rowAffected, errRow := result.RowsAffected()
+	checkErr(errRow)
+	if rowAffected != 0 {
+		return true
+	}
+	return false
+}
+
+func DeletePostByPublisher(PublisherID int) bool {
+	db := Connect()
+	stmt, err := db.Prepare("DELETE FROM posts WHERE publisher_id = ?")
+	checkErr(err)
+	result, errExec := stmt.Exec(PublisherID)
+	checkErr(errExec)
+	rowAffected, errRow := result.RowsAffected()
+	checkErr(errRow)
+	if rowAffected != 0 {
+		return true
+	}
+	return false
+}
+
+func GetUserByEmail(Email string) (models.User, bool) {
+	db := Connect()
+	user := models.User{}
+	defer db.Close()
+	stmt, err := db.Prepare("SELECT id,username,email FROM users WHERE email=?")
+
+	if err != nil {
+		fmt.Println(err)
+		return user, false
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Query(Email)
+	if err != nil {
+		fmt.Println(err)
+		return user, false
+	}
+
+	defer rows.Close()
+
+	var id int
+	var username string
+	var email string
+
+	if rows.Next() {
+		rows.Scan(&id, &username, &email)
+		user = models.User{ID: id, UserName: username, Email: email, Password: "secret"}
+		return user, true
+	}
+	return user, false
 }

@@ -84,7 +84,10 @@ func Register(username string, email string, pass string) (bool, string) {
 		}
 		database.AddUser(db, models.User{UserName: username, Email: email, Password: hash})
 
-		user := models.User{UserName: username, Email: email, Password: pass}
+		user, exist := database.GetUserByEmail(email)
+		if !exist {
+			return false, "user with this email don't exist"
+		}
 		tokenContent := jwt.MapClaims{
 			"user_id": user.ID,
 			"expiry":  time.Now().Add(time.Minute * 60).Unix(),

@@ -3,12 +3,12 @@ package main
 import (
 	"./api"
 	"./routes"
-	"./test"
 	"./utils/database"
 	"fmt"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+	"./test"
 )
 
 func main() {
@@ -23,13 +23,9 @@ func main() {
 	routes.Start(router)
 
 	// test
-	test.CreateAccount()
+	//test.CreateAccount()
 	//users := database.GetUsers()
 	//fmt.Println(users)
-	test.CreatePosts()
-	test.CreatePosts()
-	test.CreatePosts()
-	test.CreatePosts()
 	test.CreatePosts()
 	//posts := database.GetPosts()
 	//fmt.Println(posts)
