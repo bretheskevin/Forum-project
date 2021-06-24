@@ -3,7 +3,6 @@ package main
 import (
 	"./api"
 	"./routes"
-	"./test"
 	"./utils/database"
 	"fmt"
 	"github.com/gorilla/mux"
@@ -26,7 +25,7 @@ func main() {
 	//test.CreateAccount()
 	//users := database.GetUsers()
 	//fmt.Println(users)
-	test.CreatePosts()
+	//test.CreatePosts()
 	//posts := database.GetPosts()
 	//fmt.Println(posts)
 	//post, exist := database.GetPost(10)

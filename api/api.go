@@ -2,6 +2,7 @@ package api
 
 import (
 	"../auth"
+	"../models"
 	"../utils/database"
 	"encoding/json"
 	"fmt"
@@ -12,33 +13,20 @@ import (
 	"time"
 )
 
-type Login struct {
-	Email    string
-	Password string
-}
-
-type Register struct {
-	Email    string
-	Username string
-	Password string
-}
-
-type Post struct {
-	ID int
+func checkErr(err error) {
+	if err != nil {
+		panic(err)
+	}
 }
 
 func login(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		fmt.Println(err)
-	}
+	checkErr(err)
 	//r.Cookie("token")
 
-	var formattedBody Login
+	var formattedBody models.Login
 	err = json.Unmarshal(body, &formattedBody)
-	if err != nil {
-		fmt.Println(err)
-	}
+	checkErr(err)
 
 	login, token := auth.Login(formattedBody.Email, formattedBody.Password)
 	if login == true {
@@ -55,16 +43,12 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 func register(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		fmt.Println(err)
-	}
+	checkErr(err)
 	//r.Cookie("token")
 
-	var formattedBody Register
+	var formattedBody models.Register
 	err = json.Unmarshal(body, &formattedBody)
-	if err != nil {
-		fmt.Println(err)
-	}
+	checkErr(err)
 	register, token := auth.Register(formattedBody.Username, formattedBody.Email, formattedBody.Password)
 
 	if token == "email" {
@@ -140,13 +124,83 @@ func getUser(w http.ResponseWriter, r *http.Request) {
 	w.Write(jsonFormat)
 }
 
+func deleteUser(w http.ResponseWriter, r *http.Request) {
+	var message string
+	vars := mux.Vars(r)
+	id, _ := strconv.Atoi(vars["id"])
+	isDelete := database.DeleteUser(id)
+	if isDelete {
+		message = "user with id " + strconv.Itoa(id) + " has been delete"
+	} else {
+		message = "we can't found user with id: " + strconv.Itoa(id)
+	}
+	res, _ := json.Marshal(message)
+	w.Header().Set("content-type", "application/json")
+	w.Write(res)
+}
+
+func deletePost(w http.ResponseWriter, r *http.Request) {
+	var message string
+	vars := mux.Vars(r)
+	id, _ := strconv.Atoi(vars["id"])
+	isDelete := database.DeletePost(id)
+	if isDelete {
+		message = "post with id " + strconv.Itoa(id) + " has been delete"
+	} else {
+		message = "we can't found post with id: " + strconv.Itoa(id)
+	}
+	res, _ := json.Marshal(message)
+	w.Header().Set("content-type", "application/json")
+	w.Write(res)
+}
+
+// create post function to create post in db
+
+func createPost(w http.ResponseWriter, r *http.Request) {
+	cookie, err := r.Cookie("token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			// If the cookie is not set, return an unauthorized status
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		// For any other type of error, return a bad request status
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	tknStr := cookie.Value
+	fmt.Println(tknStr)
+
+	db := database.Connect()
+	body, err := ioutil.ReadAll(r.Body)
+	checkErr(err)
+	var formattedBody models.Post
+	err = json.Unmarshal(body, &formattedBody)
+	checkErr(err)
+	database.AddPost(db, models.Post{
+		Title:    formattedBody.Title,
+		Content:  formattedBody.Content,
+		Category: formattedBody.Category,
+	})
+	json.NewEncoder(w).Encode("post create")
+
+}
+
+// update user
+
+// update post
+
 func Start(router *mux.Router) {
 	router.HandleFunc("/login", login).Methods("POST")
 	router.HandleFunc("/register", register).Methods("POST")
 	router.HandleFunc("/post/{id}", getPost).Methods("GET")
+	router.HandleFunc("/post/{id}", deletePost).Methods("DELETE")
 	router.HandleFunc("/posts", getPosts).Methods("GET")
 	router.HandleFunc("/users", getUsers).Methods("GET")
 	router.HandleFunc("/user/{id}", getUser).Methods("GET")
+	router.HandleFunc("/user/{id}", deleteUser).Methods("DELETE")
 	router.HandleFunc("/posts/{category}", getPostsByCategory).Methods("GET")
 	router.HandleFunc("/posts/user/{id}", getPostsByPublisher).Methods("GET")
+	router.HandleFunc("/post", createPost).Methods("POST")
 }

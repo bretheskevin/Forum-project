@@ -1,5 +1,7 @@
 package models
 
+import "github.com/dgrijalva/jwt-go"
+
 type User struct {
 	ID                int
 	UserName          string
@@ -17,8 +19,18 @@ type Post struct {
 	Category    string
 }
 
-type ResponseUser struct {
-	ID       int
-	UserName string
+type Login struct {
 	Email    string
+	Password string
+}
+
+type Register struct {
+	Email    string
+	Username string
+	Password string
+}
+
+type Claims struct {
+	Username string
+	jwt.StandardClaims
 }
