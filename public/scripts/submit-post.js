@@ -5,8 +5,8 @@ document.getElementById("form-submit-btn").addEventListener("click", () => {
         .reduce((accumulator, [key, value]) =>
             ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }),
             {});
+
     const token = cookies["token"];
-    console.log(token)
 
     const title = document.getElementById("title").value;
     const content = document.getElementById("content").value;
@@ -28,6 +28,7 @@ document.getElementById("form-submit-btn").addEventListener("click", () => {
         "content": content,
         "category": category,
         "topic": topic,
+        "encodedPublisherId": token
     }));
 
 });
