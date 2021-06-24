@@ -8,11 +8,6 @@ import (
 )
 
 func homePage(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" && r.URL.Path != "/homepage" {
-		errorHandler(w, r)
-		return
-	}
-
 	page, err := template.ParseFiles("public/homepage.html")
 	if err != nil {
 		log.Fatal(err)
@@ -98,6 +93,18 @@ func createTopic(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func editTopic(w http.ResponseWriter, r *http.Request) {
+	page, err := template.ParseFiles("public/edit-topic.html")
+	if err != nil {
+		log.Fatal(err)
+	}
+	errorExecuteTemplate := page.ExecuteTemplate(w, "edit-topic.html", "")
+	if errorExecuteTemplate != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
+
 func errorHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
 
@@ -122,4 +129,5 @@ func Start(router *mux.Router) {
 	router.HandleFunc("/register", registerPage).Methods("GET")
 	router.HandleFunc("/login", loginPage).Methods("GET")
 	router.HandleFunc("/create-new-topic", createTopic).Methods("GET")
+	router.HandleFunc("/edit-topic", editTopic).Methods("GET")
 }

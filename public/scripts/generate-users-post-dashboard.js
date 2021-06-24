@@ -124,7 +124,8 @@ function addSettings() {
         "transparent",
         "font-w700",
         "ml-5",
-        "mr-5"
+        "mr-5",
+        "modify-btn"
     ])
     modifyBtn.textContent = "Modify Post";
 

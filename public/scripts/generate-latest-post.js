@@ -267,6 +267,7 @@ const userId = ParseJwt(token)["user_id"];
 async function main() {
     const res = await fetch("/posts/user/" + userId)
     const postsList = await res.json();
+    document.getElementById("total-posts").textContent = postsList.length;
     const latestPost = postsList.reverse()[0];
     const postToAdd = await createPost(latestPost);
     postsContainer.appendChild(postToAdd);
