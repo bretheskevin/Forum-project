@@ -1,13 +1,4 @@
 document.getElementById("form-submit-btn").addEventListener("click", () => {
-    const cookies = document.cookie
-        .split(";")
-        .map(cookie => cookie.split("="))
-        .reduce((accumulator, [key, value]) =>
-            ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }),
-            {});
-    const token = cookies["token"];
-    console.log(token)
-
     const title = document.getElementById("title").value;
     const content = document.getElementById("content").value;
     const category = document.getElementById("category").textContent;
@@ -20,7 +11,7 @@ document.getElementById("form-submit-btn").addEventListener("click", () => {
         }
     };
 
-    xhr.open("POST", "/posts");
+    xhr.open("POST", "/post");
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.responseType = "text";
     xhr.send(JSON.stringify({
