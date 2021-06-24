@@ -5,6 +5,7 @@ import (
 	"../models"
 	"../utils/database"
 	"encoding/json"
+	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gorilla/mux"
 	"io/ioutil"
@@ -21,6 +22,7 @@ func checkErr(err error) {
 
 func login(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
+	fmt.Println(body)
 	checkErr(err)
 	//r.Cookie("token")
 
@@ -161,13 +163,14 @@ func createPost(w http.ResponseWriter, r *http.Request) {
 	db := database.Connect()
 	body, err := ioutil.ReadAll(r.Body)
 	checkErr(err)
-	var formattedBody models.Post
+	var formattedBody models.PostReceive
 	err = json.Unmarshal(body, &formattedBody)
 	checkErr(err)
+	category := formattedBody.Category + "/" + formattedBody.Topic
 	database.AddPost(db, models.Post{
 		Title:       formattedBody.Title,
 		Content:     formattedBody.Content,
-		Category:    formattedBody.Category,
+		Category:    category,
 		PublisherID: int(jwt.(float64)),
 	})
 	json.NewEncoder(w).Encode("post create")
