@@ -60,6 +60,5 @@ func Login(email string, pass string) (bool, string) {
 	if err != nil {
 		panic(err.Error())
 	}
-	fmt.Println("end")
 	return true, token
 }
