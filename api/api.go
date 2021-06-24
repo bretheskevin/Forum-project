@@ -6,6 +6,7 @@ import (
 	"../utils/database"
 	"encoding/json"
 	"fmt"
+	"github.com/dgrijalva/jwt-go"
 	"github.com/gorilla/mux"
 	"io/ioutil"
 	"net/http"
@@ -21,6 +22,7 @@ func checkErr(err error) {
 
 func login(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
+	fmt.Println(body)
 	checkErr(err)
 	//r.Cookie("token")
 
@@ -157,34 +159,42 @@ func deletePost(w http.ResponseWriter, r *http.Request) {
 // create post function to create post in db
 
 func createPost(w http.ResponseWriter, r *http.Request) {
-	cookie, err := r.Cookie("token")
-	if err != nil {
-		if err == http.ErrNoCookie {
-			// If the cookie is not set, return an unauthorized status
-			w.WriteHeader(http.StatusUnauthorized)
-			return
-		}
-		// For any other type of error, return a bad request status
-		w.WriteHeader(http.StatusBadRequest)
-		return
-	}
-
-	tknStr := cookie.Value
-	fmt.Println(tknStr)
-
+	jwt := getJWT(w, r)
 	db := database.Connect()
 	body, err := ioutil.ReadAll(r.Body)
 	checkErr(err)
-	var formattedBody models.Post
+	var formattedBody models.PostReceive
 	err = json.Unmarshal(body, &formattedBody)
 	checkErr(err)
+	category := formattedBody.Category + "/" + formattedBody.Topic
 	database.AddPost(db, models.Post{
-		Title:    formattedBody.Title,
-		Content:  formattedBody.Content,
-		Category: formattedBody.Category,
+		Title:       formattedBody.Title,
+		Content:     formattedBody.Content,
+		Category:    category,
+		PublisherID: int(jwt.(float64)),
 	})
 	json.NewEncoder(w).Encode("post create")
+}
 
+func getJWT(w http.ResponseWriter, r *http.Request) interface{} {
+	cookie, err := r.Cookie("token")
+	checkErr(err)
+	tokenString := cookie.Value
+	claims := jwt.MapClaims{}
+	jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+		return []byte("TokenPassword"), nil
+	})
+	// ... error handling
+
+	// do something with decoded claims
+	//fmt.Println("Token: ", token)
+	for key, val := range claims {
+		//fmt.Printf("Key: %v, value: %v\n", key, val)
+		if key == "user_id" {
+			return val
+		}
+	}
+	return -1
 }
 
 // update user
