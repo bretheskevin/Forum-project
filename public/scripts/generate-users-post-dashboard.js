@@ -1,4 +1,5 @@
 import {minify} from "./posts-minify.js";
+import {deleteBtnEvent} from "./delete-post.js";
 
 const postsContainer = document.getElementById("posts-container");
 
@@ -19,6 +20,12 @@ const commentsSvg = "<svg width=\"30\" height=\"30\" viewBox=\"0 0 21 19\" fill=
 
 async function createPost(postContent) {
     const post = document.createElement("div");
+
+    const id = document.createElement("p");
+    id.classList.add("hide");
+    id.textContent = postContent["ID"];
+    post.appendChild(id)
+
     addClasses(post, [
         "shadow-5",
         "m-5",
@@ -105,8 +112,10 @@ function addSettings() {
         "transparent",
         "font-w700",
         "ml-5",
-        "mr-5"
+        "mr-5",
+        "delete-btn"
     ])
+
     deleteBtn.textContent = "Delete Post";
 
     const modifyBtn = document.createElement("button");
@@ -284,6 +293,7 @@ async function main() {
         postsContainer.appendChild(postToAdd);
     }
     minify();
+    deleteBtnEvent()
 }
 
 main();
