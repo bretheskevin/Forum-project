@@ -117,7 +117,7 @@ func Start(router *mux.Router) {
 	router.HandleFunc("/", homePage).Methods("GET")
 	router.HandleFunc("/homepage", homePage).Methods("GET")
 	router.HandleFunc("/feed", feedPage).Methods("GET")
-	router.HandleFunc("/dashboard/", dashboardPage).Methods("GET")
+	router.HandleFunc("/dashboard", dashboardPage).Methods("GET")
 	router.HandleFunc("/dashboard/posts", dashboardPostsPage).Methods("GET")
 	router.HandleFunc("/register", registerPage).Methods("GET")
 	router.HandleFunc("/login", loginPage).Methods("GET")
