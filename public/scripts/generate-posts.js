@@ -246,6 +246,7 @@ function addCommentsToFooter(footer) {
 async function main() {
     const res = await fetch("/posts")
     const postsList = await res.json();
+    document.getElementById("nb-of-posts").textContent = postsList.length + " posts"
     for (let post of postsList) {
         const postToAdd = await createPost(post);
         postsContainer.appendChild(postToAdd);
