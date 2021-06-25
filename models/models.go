@@ -9,6 +9,16 @@ type User struct {
 	IsAdmin           bool
 }
 
+type NewUser struct {
+	ID                int
+	UserName          string
+	Email             string
+	NewPassword       string
+	OldPassword       string
+	ProfilePictureURL string
+	IsAdmin           bool
+}
+
 type Post struct {
 	ID          int
 	Title       string
