@@ -116,8 +116,9 @@ func InitTable(db *sql.DB) {
 	PostTable(db)
 }
 
-func AddPost(database *sql.DB, post models.Post) {
-	stmt, err := database.Prepare(`
+func AddPost(post models.Post) {
+	db := Connect()
+	stmt, err := db.Prepare(`
 		INSERT INTO posts (title, content, publisher_id, category)
 		VALUES(?, ?, ?, ?)
 	`)
@@ -129,8 +130,9 @@ func AddPost(database *sql.DB, post models.Post) {
 	fmt.Println("Post " + post.Title + " added !")
 }
 
-func AddUser(database *sql.DB, user models.User) {
-	stmt, err := database.Prepare(`
+func AddUser(user models.User) {
+	db := Connect()
+	stmt, err := db.Prepare(`
 		INSERT INTO users (username,email,password,profile_picture_url , is_admin)
 		VALUES(?, ?, ?, ? ,?)
 	`)
@@ -389,4 +391,50 @@ func GetUserByEmail(Email string) (models.User, bool) {
 		return user, true
 	}
 	return user, false
+}
+
+func UpdatePost(ID int, Title string, Content string, Category string) bool {
+	db := Connect()
+	stmt, err := db.Prepare("UPDATE posts SET title=?, content=?, category=? WHERE id=?")
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	res, err := stmt.Exec(Title, Content, Category, ID)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	a, err := res.RowsAffected()
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	if a != 0 {
+		return true
+	}
+	return false
+}
+
+func UpdateUser(ID int, Username string, Email string, Password string, Image string) bool {
+	db := Connect()
+	stmt, err := db.Prepare("UPDATE users SET username=?, email=?, password=?, profile_picture_url=? WHERE id=?")
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	res, err := stmt.Exec(Username, Email, Password, ID, Image)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	a, err := res.RowsAffected()
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	if a != 0 {
+		return true
+	}
+	return false
 }
