@@ -1,16 +1,12 @@
 package models
 
-import "github.com/jinzhu/gorm"
-
 type User struct {
-	gorm.Model
 	ID                int
 	UserName          string
 	Email             string
 	Password          string
 	ProfilePictureURL string
 	IsAdmin           bool
-	Post              []Post
 }
 
 type Post struct {
@@ -21,8 +17,20 @@ type Post struct {
 	Category    string
 }
 
-type ResponseUser struct {
-	ID       int
-	UserName string
+type PostReceive struct {
+	Title    string
+	Content  string
+	Category string
+	Topic    string
+}
+
+type Login struct {
 	Email    string
+	Password string
+}
+
+type Register struct {
+	Email    string
+	Username string
+	Password string
 }

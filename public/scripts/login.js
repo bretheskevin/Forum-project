@@ -9,7 +9,7 @@ function isValid() {
         btn.classList.add("disabled");
         $(document).keypress(
             function(event) {
-                if (event.which == '13') {
+                if (event.which === '13') {
                     event.preventDefault();
                 }
             });
@@ -56,11 +56,7 @@ password.addEventListener("input", () => {
         passwordLong.classList.add("hide");
     }
 
-    if (password.value.length >= 8 && password.value.length <= 30) {
-        validPassword = true;
-    } else {
-        validPassword = false;
-    }
+    validPassword = password.value.length >= 8 && password.value.length <= 30;
 
     isValid();
 })
@@ -88,4 +84,14 @@ submitBtn.addEventListener("click", () => {
         "email": email,
         "password": password
     }));
+
+
+    // change the color of the btn
+    submitBtn.classList.remove("black");
+    submitBtn.classList.add("grey");
+    setTimeout((() => {
+        submitBtn.classList.remove("grey")
+        submitBtn.classList.add("black")
+    }),
+        100)
 })

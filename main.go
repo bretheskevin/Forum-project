@@ -8,6 +8,7 @@ import (
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+	//"./test"
 )
 
 func main() {
@@ -20,6 +21,16 @@ func main() {
 	router := mux.NewRouter()
 	api.Start(router)
 	routes.Start(router)
+
+	// test
+	//test.CreateAccount()
+	//users := database.GetUsers()
+	//fmt.Println(users)
+	//test.CreatePosts()
+	//posts := database.GetPosts()
+	//fmt.Println(posts)
+	//post, exist := database.GetPost(10)
+	//fmt.Println(post,exist)
 
 	// allow the server to access to the files
 
