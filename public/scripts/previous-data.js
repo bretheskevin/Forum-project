@@ -1,4 +1,5 @@
 const postId = parseInt(window.location.href.split("?")[1].split("=")[1]);
+document.getElementById("post-id").textContent = "" + postId;
 const titleContent = document.getElementById("title");
 const postContent = document.getElementById("content");
 
