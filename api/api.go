@@ -205,7 +205,7 @@ func createPost(w http.ResponseWriter, r *http.Request) {
 	var formattedBody models.PostReceive
 	err = json.Unmarshal(body, &formattedBody)
 	checkErr(err)
-	category := formattedBody.Category + "/" + formattedBody.Topic
+	category := formattedBody.Category + "-" + formattedBody.Topic
 	database.AddPost(models.Post{
 		Title:       formattedBody.Title,
 		Content:     formattedBody.Content,
