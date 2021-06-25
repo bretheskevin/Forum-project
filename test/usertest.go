@@ -7,8 +7,6 @@ import (
 )
 
 func CreateAccount() {
-	db := database.Connect()
-
 	users := []models.User{
 		{UserName: "Gabriel", Email: "gabriel@cancel.fr"},
 		{UserName: "Jean", Email: "jean@leroi.fr"},
@@ -20,6 +18,6 @@ func CreateAccount() {
 	for i := 0; i < len(users); i++ {
 		newPass, _ := password.HashPassword(users[i].UserName)
 		user := models.User{UserName: users[i].UserName, Email: users[i].Email, Password: newPass}
-		database.AddUser(db, user)
+		database.AddUser(user)
 	}
 }
