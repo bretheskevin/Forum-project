@@ -140,6 +140,7 @@ function createFooter(postContent) {
     commentsAndViews.classList.add("ml-auto")
     addViewsToFooter(commentsAndViews);
     addCommentsToFooter(commentsAndViews);
+    footer.appendChild(commentsAndViews);
 
     return footer;
 }
