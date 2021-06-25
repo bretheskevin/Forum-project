@@ -6,8 +6,6 @@ import (
 )
 
 func CreatePosts() {
-	db := database.Connect()
-
 	posts := []models.Post{
 		{Title: "Foot", Content: "contentTest1", PublisherID: 1, Category: "Sport"},
 		{Title: "IPhone", Content: "contentTest2", PublisherID: 3, Category: "Tech"},
@@ -23,6 +21,6 @@ func CreatePosts() {
 
 	for i := 0; i < len(posts); i++ {
 		post := models.Post{Title: posts[i].Title, Content: posts[i].Content, PublisherID: posts[i].PublisherID, Category: posts[i].Category}
-		database.AddPost(db, post)
+		database.AddPost(post)
 	}
 }

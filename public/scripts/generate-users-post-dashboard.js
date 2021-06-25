@@ -1,5 +1,6 @@
 import {minify} from "./posts-minify.js";
 import {deleteBtnEvent} from "./delete-post.js";
+import {modifyBtnEvent} from "./modify-post.js";
 
 const postsContainer = document.getElementById("posts-container");
 
@@ -295,6 +296,7 @@ async function main() {
     }
     minify();
     deleteBtnEvent()
+    modifyBtnEvent();
 }
 
 main();
