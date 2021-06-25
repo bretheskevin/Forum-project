@@ -1,14 +1,13 @@
-import {likeAndDislike} from "./like-dislike.js";
 import {minify} from "./posts-minify.js";
 
 const postsContainer = document.getElementById("posts-container");
 
-const likeSvgGrey = "<svg width=\"30\" height=\"30\" viewBox=\"0 0 14 30\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-    "                                    <path d=\"M6.20081 0.335369C6.20048 0.335712 6.20008 0.335999 6.19974 0.336399L0.328771 6.31123C-0.111044 6.75884 -0.109407 7.48283 0.332609 7.92838C0.774569 8.37387 1.48942 8.37216 1.92929 7.92455L5.87097 3.91304L5.87097 28.1292C5.87097 28.7608 6.37644 29.2727 7 29.2727C7.62356 29.2727 8.12903 28.7608 8.12903 28.1292L8.12903 3.9131L12.0707 7.92449C12.5106 8.3721 13.2254 8.37382 13.6674 7.92832C14.1095 7.48277 14.111 6.75873 13.6712 6.31118L7.80026 0.33634C7.79992 0.335997 7.79952 0.335711 7.79919 0.335312C7.35785 -0.112528 6.64069 -0.111097 6.20081 0.335369Z\" fill=\"#C4C4C4\"/>\n" +
-    "                                    </svg>"
-const dislikeSvgGrey = "<svg width=\"30\" height=\"30\" viewBox=\"0 0 14 30\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-    "<path d=\"M7.79919 28.9373C7.79952 28.937 7.79992 28.9367 7.80026 28.9363L13.6712 22.9615C14.111 22.5139 14.1094 21.7899 13.6674 21.3443C13.2254 20.8988 12.5106 20.9005 12.0707 21.3482L8.12903 25.3597L8.12903 1.14347C8.12903 0.51193 7.62356 0 7 0C6.37644 0 5.87097 0.51193 5.87097 1.14347L5.87097 25.3596L1.92929 21.3482C1.48942 20.9006 0.77457 20.8989 0.332609 21.3444C-0.109464 21.7899 -0.110988 22.514 0.328771 22.9615L6.19974 28.9364C6.20008 28.9367 6.20048 28.937 6.20081 28.9374C6.64215 29.3852 7.35931 29.3838 7.79919 28.9373Z\" fill=\"#C4C4C4\"/>\n" +
-    "</svg>"
+const likeSvgGreen = "<svg width=\"30\" height=\"30\" viewBox=\"0 0 14 30\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+    "                                <path d=\"M6.20081 0.335369C6.20048 0.335712 6.20008 0.335999 6.19974 0.336399L0.328771 6.31123C-0.111044 6.75884 -0.109407 7.48283 0.332609 7.92838C0.774569 8.37387 1.48942 8.37216 1.92929 7.92455L5.87097 3.91304L5.87097 28.1292C5.87097 28.7608 6.37644 29.2727 7 29.2727C7.62356 29.2727 8.12903 28.7608 8.12903 28.1292L8.12903 3.9131L12.0707 7.92449C12.5106 8.3721 13.2254 8.37382 13.6674 7.92832C14.1095 7.48277 14.111 6.75873 13.6712 6.31118L7.80026 0.33634C7.79992 0.335997 7.79952 0.335711 7.79919 0.335312C7.35785 -0.112528 6.64069 -0.111097 6.20081 0.335369Z\" fill=\"#34C931\"/>\n" +
+    "                                </svg>"
+const dislikeSvgRed = "<svg width=\"30\" height=\"30\" viewBox=\"0 0 14 30\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+    "                                    <path d=\"M7.79919 28.9373C7.79952 28.937 7.79992 28.9367 7.80026 28.9363L13.6712 22.9615C14.111 22.5139 14.1094 21.7899 13.6674 21.3443C13.2254 20.8988 12.5106 20.9005 12.0707 21.3482L8.12903 25.3597L8.12903 1.14347C8.12903 0.51193 7.62356 0 7 0C6.37644 0 5.87097 0.51193 5.87097 1.14347L5.87097 25.3596L1.92929 21.3482C1.48942 20.9006 0.77457 20.8989 0.332609 21.3444C-0.109464 21.7899 -0.110988 22.514 0.328771 22.9615L6.19974 28.9364C6.20008 28.9367 6.20048 28.937 6.20081 28.9374C6.64215 29.3852 7.35931 29.3838 7.79919 28.9373Z\" fill=\"#FF1D1D\"/>\n" +
+    "                                </svg>"
 const moreSvg = "<svg width=\"30\" height=\"30\" viewBox=\"0 0 21 5\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" class=\"more-svg\"><circle cx=\"2.5\" cy=\"2.5\" r=\"2.5\" fill=\"#41599D\"/><circle cx=\"10.5\" cy=\"2.5\" r=\"2.5\" fill=\"#41599D\"/><circle cx=\"18.5\" cy=\"2.5\" r=\"2.5\" fill=\"#41599D\"/></svg"
 const viewsSvg = "<svg width=\"30\" height=\"30\" viewBox=\"0 0 29 18\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "                                <path d=\"M0.17944 8.4507C0.431738 8.10557 6.44314 0 14.1208 0C21.7984 0 27.8101 8.10557 28.0621 8.45037C28.3011 8.77779 28.3011 9.22188 28.0621 9.5493C27.8101 9.89443 21.7984 18 14.1208 18C6.44314 18 0.431738 9.89438 0.17944 9.54958C-0.0598392 9.22221 -0.0598392 8.77779 0.17944 8.4507ZM14.1208 16.1379C19.7762 16.1379 24.6744 10.7581 26.1243 8.99937C24.6762 7.23908 19.7883 1.86206 14.1208 1.86206C8.46565 1.86206 3.5678 7.24095 2.11723 9.00063C3.56532 10.7609 8.45324 16.1379 14.1208 16.1379Z\" fill=\"#C4C4C4\"/>\n" +
@@ -22,11 +21,14 @@ async function createPost(postContent) {
     const post = document.createElement("div");
     addClasses(post, [
         "card",
-        "shadow-1",
+        "shadow-5",
         "rounded-2",
         "white",
         "posts",
         "mb-5",
+        "m-4",
+        "light-hoverable-1",
+        "cards-color",
     ])
 
     post.appendChild(await createHeader(postContent));
@@ -52,11 +54,15 @@ async function createHeader(postContent) {
     const header = document.createElement("div");
     addClasses(header, [
         "card-header",
-        "d-inline-flex",
+        "d-flex",
         "vcenter",
         "w100",
         "pb-2",
+        "fx-wrap",
     ])
+
+    const span = document.createElement("span");
+    span.classList.add("d-inline-flex");
 
     const img = document.createElement("img");
     img.src = user.ProfilePictureURL;
@@ -67,7 +73,7 @@ async function createHeader(postContent) {
         "rounded-4",
         "mr-4",
     ])
-    header.appendChild(img);
+    span.appendChild(img);
 
 
     const name = document.createElement("p");
@@ -78,7 +84,9 @@ async function createHeader(postContent) {
     ])
     const username = user["UserName"];
     name.textContent = "Posted by " + username
-    header.appendChild(name);
+    span.appendChild(name);
+
+    header.appendChild(span);
 
     // Add clock system
     const time = document.createElement("p");
@@ -153,12 +161,13 @@ function addLikesToFooter(footer) {
         "mr-3",
         "cursor-pointer",
     ])
-    likes.innerHTML = likeSvgGrey;
+    likes.innerHTML = likeSvgGreen;
 
     // INSERT NUMBER OF LIKES FROM API
     const numberOfLikes = 1500;
     const likesContent = document.createElement("p");
     likesContent.classList.add("ml-2");
+    likesContent.classList.add("txt-green");
     likesContent.textContent = numberOfLikes.toString();
 
     likes.appendChild(likesContent);
@@ -174,12 +183,13 @@ function addDislikesToFooter(footer) {
         "mr-3",
         "cursor-pointer",
     ])
-    dislikes.innerHTML = dislikeSvgGrey;
+    dislikes.innerHTML = dislikeSvgRed;
 
     // INSERT NUMBER OF LIKES FROM API
     const numberOfDislikes = 50;
     const dislikesContent = document.createElement("p");
     dislikesContent.classList.add("ml-2");
+    dislikesContent.classList.add("txt-red");
     dislikesContent.textContent = numberOfDislikes.toString();
 
     dislikes.appendChild(dislikesContent);
@@ -243,16 +253,26 @@ function addCommentsToFooter(footer) {
 }
 
 
-async function main() {
-    const res = await fetch("/posts")
-    const postsList = await res.json();
-    document.getElementById("nb-of-posts").textContent = postsList.length + " posts"
-    for (let post of postsList.reverse()) {
-        const postToAdd = await createPost(post);
-        postsContainer.appendChild(postToAdd);
+const ParseJwt = (token) => {
+    try {
+        return JSON.parse(atob(token.split('.')[1]))
+    } catch (e) {
+        return null
     }
-    likeAndDislike()
+}
+
+const token = document.cookie;
+const userId = ParseJwt(token)["user_id"];
+
+async function main() {
+    const res = await fetch("/posts/user/" + userId)
+    const postsList = await res.json();
+    document.getElementById("total-posts").textContent = postsList.length;
+    const latestPost = postsList.reverse()[0];
+    const postToAdd = await createPost(latestPost);
+    postsContainer.appendChild(postToAdd);
     minify();
 }
 
-main()
+main();
+
