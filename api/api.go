@@ -118,7 +118,7 @@ func getPosts(w http.ResponseWriter, r *http.Request) {
 }
 
 func getPostsByCategory(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)             // get var in url
+	vars := mux.Vars(r) // get var
 	category, _ := vars["category"] // take category var
 	posts := database.GetPostsByCategory(category)
 	jsonFormat, _ := json.Marshal(posts) // format
