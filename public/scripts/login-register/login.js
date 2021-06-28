@@ -9,8 +9,12 @@ function isValid() {
     const btn = document.getElementById("form-submit-login");
     if (validEmail && validPassword) {
         btn.classList.remove("disabled");
+        btn.classList.remove("grey")
+        btn.classList.add("black")
     } else {
         btn.classList.add("disabled");
+        btn.classList.remove("black");
+        btn.classList.add("grey");
         $(document).keypress(
             function(event) {
                 if (event.which === '13') {
@@ -22,7 +26,6 @@ function isValid() {
 
 
 // email
-
 function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
@@ -65,37 +68,3 @@ password.addEventListener("input", () => {
     isValid();
 })
 
-const submitBtn = document.getElementById("form-submit-login");
-submitBtn.addEventListener("click", () => {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-    const request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-            if (this.responseText.includes("Wrong")) {
-                document.getElementById("error").classList.remove("hide")
-            } else {
-                window.location.href = "/feed"
-            }
-        }
-    };
-
-    request.open("POST", "/login");
-    request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    request.responseType = "text";
-    request.send(JSON.stringify({
-        "email": email,
-        "password": password
-    }));
-
-
-    // change the color of the btn
-    submitBtn.classList.remove("black");
-    submitBtn.classList.add("grey");
-    setTimeout((() => {
-        submitBtn.classList.remove("grey")
-        submitBtn.classList.add("black")
-    }),
-        100)
-})

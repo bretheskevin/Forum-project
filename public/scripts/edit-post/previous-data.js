@@ -32,17 +32,15 @@ async function fetchData() {
     return await response.json();
 }
 
-async function main() {
-    const data = await fetchData();
-    const category = data["Category"].split("-")[0];
-    const topic = data["Category"].split("-")[1];
 
-    titleContent.value = data["Title"];
-    postContent.value = data["Content"];
-    activeCategory(document.getElementById(category))
-    document.getElementById("category").textContent = category;
-    activeTopics(document.getElementById(topic));
-    document.getElementById("topic").textContent = topic;
-}
+const data = await fetchData();
+const category = data["Category"].split("-")[0];
+const topic = data["Category"].split("-")[1];
 
-main()
+titleContent.value = data["Title"];
+postContent.value = data["Content"];
+activeCategory(document.getElementById(category))
+document.getElementById("category").textContent = category;
+activeTopics(document.getElementById(topic));
+document.getElementById("topic").textContent = topic;
+

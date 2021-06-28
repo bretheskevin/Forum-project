@@ -1,6 +1,7 @@
-import {minify} from "./posts-minify.js";
-import {deleteBtnEvent} from "./delete-post.js";
-import {modifyBtnEvent} from "./modify-post.js";
+import {minify} from "../posts/posts-minify.js";
+import {deleteBtnEvent} from "../api/delete-post.js";
+import {modifyBtnEvent} from "../edit-post/modify-post.js";
+import {Api} from "../api/api.js";
 
 const postsContainer = document.getElementById("posts-container");
 
@@ -10,7 +11,6 @@ const likeSvgGreen = "<svg width=\"30\" height=\"30\" viewBox=\"0 0 14 30\" fill
 const dislikeSvgRed = "<svg width=\"30\" height=\"30\" viewBox=\"0 0 14 30\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "                                    <path d=\"M7.79919 28.9373C7.79952 28.937 7.79992 28.9367 7.80026 28.9363L13.6712 22.9615C14.111 22.5139 14.1094 21.7899 13.6674 21.3443C13.2254 20.8988 12.5106 20.9005 12.0707 21.3482L8.12903 25.3597L8.12903 1.14347C8.12903 0.51193 7.62356 0 7 0C6.37644 0 5.87097 0.51193 5.87097 1.14347L5.87097 25.3596L1.92929 21.3482C1.48942 20.9006 0.77457 20.8989 0.332609 21.3444C-0.109464 21.7899 -0.110988 22.514 0.328771 22.9615L6.19974 28.9364C6.20008 28.9367 6.20048 28.937 6.20081 28.9374C6.64215 29.3852 7.35931 29.3838 7.79919 28.9373Z\" fill=\"#FF1D1D\"/>\n" +
     "                                </svg>"
-const moreSvg = "<svg width=\"30\" height=\"30\" viewBox=\"0 0 21 5\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" class=\"more-svg\"><circle cx=\"2.5\" cy=\"2.5\" r=\"2.5\" fill=\"#41599D\"/><circle cx=\"10.5\" cy=\"2.5\" r=\"2.5\" fill=\"#41599D\"/><circle cx=\"18.5\" cy=\"2.5\" r=\"2.5\" fill=\"#41599D\"/></svg"
 const viewsSvg = "<svg width=\"30\" height=\"30\" viewBox=\"0 0 29 18\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "                                <path d=\"M0.17944 8.4507C0.431738 8.10557 6.44314 0 14.1208 0C21.7984 0 27.8101 8.10557 28.0621 8.45037C28.3011 8.77779 28.3011 9.22188 28.0621 9.5493C27.8101 9.89443 21.7984 18 14.1208 18C6.44314 18 0.431738 9.89438 0.17944 9.54958C-0.0598392 9.22221 -0.0598392 8.77779 0.17944 8.4507ZM14.1208 16.1379C19.7762 16.1379 24.6744 10.7581 26.1243 8.99937C24.6762 7.23908 19.7883 1.86206 14.1208 1.86206C8.46565 1.86206 3.5678 7.24095 2.11723 9.00063C3.56532 10.7609 8.45324 16.1379 14.1208 16.1379Z\" fill=\"#C4C4C4\"/>\n" +
     "                                <path d=\"M14.1208 3.41379C17.201 3.41379 19.707 5.91983 19.707 9.00002C19.707 12.0802 17.201 14.5863 14.1208 14.5863C11.0406 14.5863 8.53456 12.0802 8.53456 9.00002C8.53456 5.91983 11.0406 3.41379 14.1208 3.41379ZM14.1208 12.7241C16.1744 12.7241 17.8449 11.0535 17.8449 9.00002C17.8449 6.9465 16.1743 5.2759 14.1208 5.2759C12.0673 5.2759 10.3967 6.9465 10.3967 9.00002C10.3967 11.0535 12.0672 12.7241 14.1208 12.7241Z\" fill=\"#C4C4C4\"/>\n" +
@@ -285,19 +285,14 @@ const ParseJwt = (token) => {
 const token = document.cookie;
 const userId = ParseJwt(token)["user_id"];
 
-async function main() {
-    const res = await fetch("/posts/user/" + userId)
-    const postsList = await res.json();
-    const numberOfPost = document.getElementById("number-of-posts");
-    numberOfPost.textContent = postsList.length + " posts"
-    for (let post of postsList.reverse()) {
-        const postToAdd = await createPost(post);
-        postsContainer.appendChild(postToAdd);
-    }
-    minify();
-    deleteBtnEvent()
-    modifyBtnEvent();
-}
 
-main();
+const postsList = await new Api().getPostsByUser(userId)
+document.getElementById("number-of-posts").textContent = postsList.length + " posts"
+for (let post of postsList.reverse()) {
+    const postToAdd = await createPost(post);
+    postsContainer.appendChild(postToAdd);
+}
+minify();
+deleteBtnEvent()
+modifyBtnEvent();
 

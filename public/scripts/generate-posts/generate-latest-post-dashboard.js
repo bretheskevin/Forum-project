@@ -1,4 +1,4 @@
-import {minify} from "./posts-minify.js";
+import {minify} from "../posts/posts-minify.js";
 
 const postsContainer = document.getElementById("posts-container");
 
@@ -142,12 +142,13 @@ function createFooter(postContent) {
 
     addLikesToFooter(footer);
     addDislikesToFooter(footer);
-    addMoreToFooter(footer);
 
     const commentsAndViews = document.createElement("span");
     commentsAndViews.classList.add("ml-auto")
     addViewsToFooter(commentsAndViews);
     addCommentsToFooter(commentsAndViews);
+    footer.appendChild(commentsAndViews);
+
 
     return footer;
 }
@@ -194,17 +195,6 @@ function addDislikesToFooter(footer) {
 
     dislikes.appendChild(dislikesContent);
     footer.appendChild(dislikes);
-}
-
-function addMoreToFooter(footer) {
-    const more = document.createElement("div");
-    addClasses(more, [
-        "d-inline-flex",
-        "ml-5",
-        "cursor-pointer",
-    ])
-    more.innerHTML = moreSvg;
-    footer.appendChild(more);
 }
 
 function addViewsToFooter(footer) {
@@ -264,15 +254,14 @@ const ParseJwt = (token) => {
 const token = document.cookie;
 const userId = ParseJwt(token)["user_id"];
 
-async function main() {
-    const res = await fetch("/posts/user/" + userId)
-    const postsList = await res.json();
-    document.getElementById("total-posts").textContent = postsList.length;
-    const latestPost = postsList.reverse()[0];
-    const postToAdd = await createPost(latestPost);
-    postsContainer.appendChild(postToAdd);
-    minify();
-}
 
-main();
+const res = await fetch("/posts/user/" + userId)
+const postsList = await res.json();
+document.getElementById("total-posts").textContent = postsList.length;
+const latestPost = postsList.reverse()[0];
+const postToAdd = await createPost(latestPost);
+postsContainer.appendChild(postToAdd);
+minify();
+
+
 
