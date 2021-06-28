@@ -35,7 +35,7 @@
                         <i class="mdi mdi-chevron-down vself-center font-s5 ml-3 chevrons"></i>
                     </div>
                     <ul id="categories-collapsible" class="p-0 collapsible" data-ax="collapsible">
-                        <li class="shadow-4 p-3 rounded-2 white mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 cursor-pointer categories" id="technology">
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 cursor-pointer categories" id="technology">
                             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
                                 <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" fill="#E8E8E8" stroke="#C4C4C4"/>
                                 <circle cx="16" cy="16" r="4" fill="#2B3F92" stroke="white"/>
@@ -79,7 +79,7 @@
                     <i class="mdi mdi-chevron-down vself-center font-s5 ml-3 chevrons"></i>
                 </div>
                 <ul class="p-0 collapsible" id="topics-collapsible" data-ax="collapsible">
-                    <li class="shadow-4 p-3 rounded-2 white mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 cursor-pointer topics" id="computer">
+                    <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 cursor-pointer topics" id="computer">
                         <svg width="9" height="10" viewBox="0 0 9 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-4">
                             <ellipse cx="4.63164" cy="5" rx="3.78947" ry="4" fill="#2B3F92" stroke="white"/>
                         </svg>
@@ -125,9 +125,9 @@
             </div>
 
 
-
             <div class="col-xs4 col-lg3 cards-color mr-5 rounded-4 p-4" id="form-container">
                 <div class="mr-5 ml-5" id="create-topic-form">
+                    <h1 class="txt-blue txt-dark-5 font-s7">Edit your post: </h1>
                     <div class="grix xs6 mb-5">
                         <div class="form-field col-xs2">
                             <input type="text" id="title" class="form-control rounded-2 pl-3 white" placeholder="Title" />
@@ -142,6 +142,9 @@
                         <div class="form-field col-xs6 hide">
                             <p id="topic">computer</p>
                         </div>
+                        <div class="col-xs6 hide">
+                            <p id="post-id">-1</p>
+                        </div>
 
                         <div class="form-file col-xs6">
                             <label for="img" class="btn primary rounded-1 shadow-1 upload-image-bg w100 upload-image-color pt-4 pb-4 d-flex">
@@ -155,7 +158,7 @@
                         </div>
                     </div>
                     <div class="d-flex">
-                        <button class="btn rounded-1 bg-primary txt-white rounded-2 pt-3 pb-3 ml-auto mr-auto" type="submit" value="+ New Post" id="form-submit-btn" form="create-topic-form">+ New Post</button>
+                        <button class="btn rounded-1 bg-primary txt-white rounded-2 pt-3 pb-3 ml-auto mr-auto" type="submit" value="+ New Post" id="form-submit-btn" form="create-topic-form">Update Post</button>
                     </div>
                 </div>
             </div>
@@ -165,7 +168,8 @@
     <script src="https://cdn.jsdelivr.net/npm/axentix@1.3.0/dist/js/axentix.min.js"></script>
     <script src="/scripts/chevrons.js"></script>
     <script src="/scripts/categories-topics-selection.js"></script>
-    <script src="/scripts/submit-post.js"></script>
+    <script src="/scripts/previous-data.js"></script>
+    <script src="/scripts/submit-update-post.js"></script>
 </body>
 
 </html>

@@ -6,7 +6,6 @@ import (
 )
 
 func CreatePosts() {
-
 	posts := []models.Post{
 		{Title: "Foot", Content: "contentTest1", PublisherID: 1, Category: "Sport"},
 		{Title: "IPhone", Content: "contentTest2", PublisherID: 3, Category: "Tech"},
