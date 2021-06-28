@@ -1,8 +1,3 @@
-import {likeAndDislike} from "./like-dislike.js";
-import {minify} from "./posts-minify.js";
-
-const postsContainer = document.getElementById("posts-container");
-
 const likeSvgGrey = "<svg width=\"30\" height=\"30\" viewBox=\"0 0 14 30\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
     "                                    <path d=\"M6.20081 0.335369C6.20048 0.335712 6.20008 0.335999 6.19974 0.336399L0.328771 6.31123C-0.111044 6.75884 -0.109407 7.48283 0.332609 7.92838C0.774569 8.37387 1.48942 8.37216 1.92929 7.92455L5.87097 3.91304L5.87097 28.1292C5.87097 28.7608 6.37644 29.2727 7 29.2727C7.62356 29.2727 8.12903 28.7608 8.12903 28.1292L8.12903 3.9131L12.0707 7.92449C12.5106 8.3721 13.2254 8.37382 13.6674 7.92832C14.1095 7.48277 14.111 6.75873 13.6712 6.31118L7.80026 0.33634C7.79992 0.335997 7.79952 0.335711 7.79919 0.335312C7.35785 -0.112528 6.64069 -0.111097 6.20081 0.335369Z\" fill=\"#C4C4C4\"/>\n" +
     "                                    </svg>"
@@ -18,7 +13,7 @@ const commentsSvg = "<svg width=\"30\" height=\"30\" viewBox=\"0 0 21 19\" fill=
     "                                <path d=\"M3.0567 18.4905H1.56871L2.6209 17.4383C3.18823 16.871 3.54251 16.1331 3.63776 15.3326C2.15732 14.3611 1.07476 13.0829 0.495268 11.6171C-0.0838141 10.1523 -0.156585 8.53992 0.284846 6.95409C0.814497 5.05125 2.05677 3.31687 3.78276 2.07041C5.65836 0.715953 7.99326 0 10.5351 0C13.7371 0 16.4361 0.919966 18.3401 2.66038C20.0553 4.22833 21 6.34328 21 8.61569C21 9.7197 20.7752 10.7939 20.3319 11.8085C19.8731 12.8584 19.2013 13.7932 18.3352 14.587C16.4286 16.3343 13.7314 17.2578 10.5351 17.2578C9.3485 17.2578 8.11033 17.0994 7.00488 16.8088C5.95852 17.8822 4.54063 18.4905 3.0567 18.4905ZM10.5351 1.2327C5.43832 1.2327 2.31092 4.27226 1.47239 7.28466C0.680009 10.1314 1.84808 12.8213 4.597 14.4801L4.90415 14.6655L4.8947 15.0241C4.87596 15.7339 4.70676 16.4175 4.40388 17.0355C5.14141 16.786 5.81064 16.3336 6.3347 15.7144L6.5953 15.4066L6.98175 15.5221C8.06624 15.8465 9.32816 16.0251 10.5351 16.0251C16.8783 16.0251 19.7673 12.1843 19.7673 8.61569C19.7673 6.69366 18.9651 4.9018 17.5083 3.57024C15.8354 2.04103 13.4241 1.2327 10.5351 1.2327Z\" fill=\"#C4C4C4\"/>\n" +
     "                                </svg>"
 
-async function createPost(postContent) {
+export async function createPost(postContent, container) {
     const post = document.createElement("div");
     addClasses(post, [
         "card",
@@ -33,7 +28,7 @@ async function createPost(postContent) {
     post.appendChild(await createContent(postContent));
     post.appendChild(await createFooter(postContent));
 
-    return post
+    container.appendChild(post)
 }
 
 function addClasses(element, classes) {
@@ -242,30 +237,3 @@ function addCommentsToFooter(footer) {
 
     footer.appendChild(comments);
 }
-
-const categoriesAndTopics = document.getElementsByClassName("categories-and-topics")
-
-async function main() {
-    document.getElementById("posts-container").innerHTML = "";
-
-    let categoryFilter = document.getElementById("category").textContent + "-" + document.getElementById("topic").textContent;
-
-    const res = await fetch("/posts/" + categoryFilter)
-    const postsList = await res.json();
-    document.getElementById("nb-of-posts").textContent = postsList.length + " posts"
-    for (let post of postsList.reverse()) {
-        const postToAdd = await createPost(post);
-        postsContainer.appendChild(postToAdd);
-    }
-    likeAndDislike()
-    minify();
-}
-
-main()
-
-for (let element of categoriesAndTopics) {
-    element.addEventListener("click", main)
-}
-
-
-

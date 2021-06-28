@@ -51,17 +51,17 @@
                 </div>
 
 
-                <a href="#" class="filters" id="latest">
-                    <p class="bg-primary txt-white txt-center mt-5 mb-4 pt-3 pb-3 rounded-2 font-w700">Latest</p>
-                </a>
+                <div class="filters cursor-pointer" id="latest">
+                    <p class="bg-primary txt-white txt-center mt-5 mb-4 pt-3 pb-3 rounded-2 font-w700 active-primary-filter">Latest</p>
+                </div>
 
-                <a href="#" class="filters" id="popular">
+                <div class="filters cursor-pointer" id="popular">
                     <p>Popular</p>
-                </a>
+                </div>
 
-                <a href="#" class="filters" id="older">
+                <div class="filters cursor-pointer" id="older">
                     <p>Older</p>
-                </a>
+                </div>
 
                 <div class="mb-5 mt-5">
                     <div class="d-inline-flex txt-blue txt-dark-2 collapsible-trigger cursor-pointer" id="categories" data-target="categories-collapsible">
@@ -242,12 +242,19 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axentix@1.3.2/dist/js/axentix.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="/scripts/chevrons.js"></script>
-    <script src="/scripts/filters.js" type="module"></script>
-    <script src="/scripts/hide-not-logged.js"></script>
-    <script src="/scripts/hide-logged.js"></script>
-    <script src="/scripts/categories-topics-selection.js"></script>
-    <script src="/scripts/generate-posts-by-category.js" type="module"></script>
+    <script src="/scripts/filters/chevrons.js"></script>
+    <script src="/scripts/filters/categories-topics-selection.js" type="module"></script>
+    <script src="/scripts/filters/primary-filters.js" type="module"></script>
+    <script src="/scripts/logged-display/hide-not-logged.js"></script>
+    <script src="/scripts/logged-display/hide-logged.js"></script>
+    <script type="module">
+        import {generatePostsByCategory} from "./scripts/generate-posts/generate-posts-by-category.js";
+
+        generatePostsByCategory(
+            document.getElementById("posts-container"),
+            document.getElementsByClassName("active-primary-filter")[0].parentElement.getAttribute("id")
+        )
+    </script>
 </body>
 
 </html>

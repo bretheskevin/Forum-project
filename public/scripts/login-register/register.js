@@ -61,11 +61,7 @@ password.addEventListener("input", () => {
         passwordLong.classList.add("hide");
     }
 
-    if (password.value.length >= 8 && password.value.length <= 30) {
-        validPassword = true;
-    } else {
-        validPassword = false;
-    }
+    validPassword = password.value.length >= 8 && password.value.length <= 30;
 
     isValid();
 })
@@ -91,52 +87,3 @@ username.addEventListener("input", () => {
 
     isValid();
 })
-
-
-const submitBtn = document.getElementById("form-submit-register");
-submitBtn.addEventListener("click", () => {
-    const email = document.getElementById("email").value;
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-
-    const request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-            setErrorMessage(this.responseText);
-        }
-    };
-
-    request.open("POST", "/register");
-    request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    request.responseType = "text";
-    request.send(JSON.stringify({
-        "email": email,
-        "username": username,
-        "password": password
-    }));
-
-
-    // change the color of the btn
-    submitBtn.classList.remove("black");
-    submitBtn.classList.add("grey");
-    setTimeout((() => {
-            submitBtn.classList.remove("grey")
-            submitBtn.classList.add("black")
-        }),
-        100)
-})
-
-function setErrorMessage(response) {
-    const error = document.getElementById("error");
-    const errorMessage = document.getElementById("error-content");
-    if (response.includes("username")) {
-        error.classList.remove("hide");
-        errorMessage.textContent = "The username is already taken !";
-    } else if (response.includes("email")) {
-        error.classList.remove("hide");
-        errorMessage.textContent = "The email is already taken !";
-    } else {
-        window.location.href = "/feed"
-    }
-
-}
