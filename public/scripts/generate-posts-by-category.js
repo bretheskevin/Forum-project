@@ -250,8 +250,6 @@ async function main() {
 
     let categoryFilter = document.getElementById("category").textContent + "-" + document.getElementById("topic").textContent;
 
-    console.log("/posts/" + categoryFilter)
-
     const res = await fetch("/posts/" + categoryFilter)
     const postsList = await res.json();
     document.getElementById("nb-of-posts").textContent = postsList.length + " posts"
