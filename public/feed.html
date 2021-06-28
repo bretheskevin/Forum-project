@@ -8,7 +8,7 @@
     <!-- Axentix CSS minified version -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@1.3.1/dist/css/axentix.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.9.55/css/materialdesignicons.min.css" />
-    <link rel="stylesheet" href="styles/feed.css">
+    <link rel="stylesheet" href="/styles/feed.css">
 </head>
 
 <body class="layout with-sidenav">
@@ -16,19 +16,22 @@
         <nav class="navbar white pb-5 pt-5 txt-blue txt-dark-4">
             <p class="navbar-brand ml-2 hide-xs">Ynov Forum Project</p>
             <div class="navbar-menu ml-auto font-s4">
-                <a class="navbar-link" href="/register">Register</a>
-                <a class="navbar-link" href="/login">Login</a>
+                <a class="navbar-link hide-if-logged" href="/register">Register</a>
+                <a class="navbar-link hide-if-logged" href="/login">Login</a>
+                <a class="navbar-link hide-if-not-logged" href="/dashboard">Dashboard</a>
             </div>
         </nav>
 
         <div class="ml-5 mt-5 pt-1">
-            <div class="ml-5 mt-5 pt-">
+            <div class="ml-5 mt-5">
                 <p id="path">Forum/ Technology/ Computer/ <span class="font-w700">Latest</span></p>
             </div>
         </div>
     </header>
 
     <main>
+        <p class="hide" id="category">technology</p>
+        <p class="hide" id="topic">computer</p>
 
         <div class="grix xs2 md4 lg6  m-4 pl-2 pr-2 gutter-xs7">
 
@@ -48,15 +51,15 @@
                 </div>
 
 
-                <a href="#">
+                <a href="#" class="filters" id="latest">
                     <p class="bg-primary txt-white txt-center mt-5 mb-4 pt-3 pb-3 rounded-2 font-w700">Latest</p>
                 </a>
 
-                <a href="#">
+                <a href="#" class="filters" id="popular">
                     <p>Popular</p>
                 </a>
 
-                <a href="#">
+                <a href="#" class="filters" id="older">
                     <p>Older</p>
                 </a>
 
@@ -66,20 +69,40 @@
                         <i class="mdi mdi-chevron-down vself-center font-s5 ml-3 chevrons"></i>
                     </div>
                     <ul id="categories-collapsible" class="p-0 collapsible" data-ax="collapsible">
-                        <li class="shadow-4 p-3 rounded-2 mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 categories cursor-pointer">
-                            <div class="txt-blue txt-dark-2 circle-icon rounded-1 pl-2 pr-2 pt-1 pb-1 bd-solid bd-1 mr-3">●</div> Technology
+                        <li class="shadow-4 p-3 rounded-2 mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 cursor-pointer categories categories-and-topics" id="technology">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" fill="#E8E8E8" stroke="#C4C4C4"/>
+                                <circle cx="16" cy="16" r="4" fill="#2B3F92" stroke="white"/>
+                            </svg>
+                            Technology
                         </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 categories cursor-pointer">
-                            <div class="txt-green circle-icon rounded-1 pl-2 pr-2 pt-1 pb-1 bd-solid bd-1 mr-3">●</div> Social
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 categories cursor-pointer categories-and-topics" id="social">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" fill="#E8E8E8" stroke="#C4C4C4"/>
+                                <circle cx="16" cy="16" r="4" fill="#34C931" stroke="white"/>
+                            </svg>
+                            Social
                         </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 categories cursor-pointer">
-                            <div class="txt-magenta txt-dark-2 circle-icon rounded-1 pl-2 pr-2 pt-1 pb-1 bd-solid bd-1 mr-3">●</div> Reader
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 categories cursor-pointer categories categories-and-topics" id="reader">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" fill="#E8E8E8" stroke="#C4C4C4"/>
+                                <circle cx="16" cy="16" r="4" fill="#8631C9" stroke="white"/>
+                            </svg>
+                            Reader
                         </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 categories cursor-pointer">
-                            <div class="txt-yellow txt-dark-2 circle-icon rounded-1 pl-2 pr-2 pt-1 pb-1 bd-solid bd-1 mr-3">●</div> Sports
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 categories cursor-pointer categories-and-topics" id="sports">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" fill="#E8E8E8" stroke="#C4C4C4"/>
+                                <circle cx="16" cy="16" r="4" fill="#FFA41D" stroke="white"/>
+                            </svg>
+                            Sports
                         </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 categories cursor-pointer">
-                            <div class="txt-red txt-dark-2 circle-icon rounded-1 pl-2 pr-2 pt-1 pb-1 bd-solid bd-1 mr-3">●</div> Political
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 categories cursor-pointer categories-and-topics" id="political">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                                <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" fill="#E8E8E8" stroke="#C4C4C4"/>
+                                <circle cx="16" cy="16" r="4" fill="#FF1D1D" stroke="white"/>
+                            </svg>
+                            Political
                         </li>
                     </ul>
                 </div>
@@ -90,33 +113,54 @@
                         <i class="mdi mdi-chevron-down vself-center font-s5 ml-3 chevrons"></i>
                     </div>
                     <ul class="p-0 collapsible" id="topics-collapsible" data-ax="collapsible">
-                        <li class="shadow-4 p-3 rounded-2 mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 topics cursor-pointer">
-                            <div class="txt-blue txt-dark-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Computer
+                        <li class="shadow-4 p-3 rounded-2 mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 topics cursor-pointer categories-and-topics" id="computer">
+                            <svg width="9" height="10" viewBox="0 0 9 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-4">
+                                <ellipse cx="4.63164" cy="5" rx="3.78947" ry="4" fill="#2B3F92" stroke="white"/>
+                            </svg>
+                            Computer
                         </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 topics cursor-pointer">
-                            <div class="txt-green pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Crypto currency
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 topics cursor-pointer categories-and-topics" id="crypto_currency">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-4">
+                                <circle cx="5" cy="5" r="4" fill="#A0C29F" stroke="white"/>
+                            </svg>
+                            Crypto currency
                         </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 topics cursor-pointer">
-                            <div class="txt-magenta txt-dark-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Cyber-security
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 topics cursor-pointer categories-and-topics" id="cyber_security">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-4">
+                                <circle cx="5" cy="5" r="4" fill="#836D95" stroke="white"/>
+                            </svg>
+                            Cyber-security
                         </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 topics cursor-pointer">
-                            <div class="txt-yellow txt-dark-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Web Development
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 topics cursor-pointer categories-and-topics" id="web_development">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-4">
+                                <circle cx="5" cy="5" r="4" fill="#E8C898" stroke="white"/>
+                            </svg>
+                            Web Development
                         </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 topics cursor-pointer">
-                            <div class="txt-viride pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Python
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 topics cursor-pointer categories-and-topics" id="python">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-4">
+                                <circle cx="5" cy="5" r="4" fill="#399BBA" stroke="white"/>
+                            </svg>
+                            Python
                         </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 topics cursor-pointer">
-                            <div class="txt-orange pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Network
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 topics cursor-pointer categories-and-topics" id="network">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-4">
+                                <circle cx="5" cy="5" r="4" fill="#D27265" stroke="white"/>
+                            </svg>
+                            Network
                         </li>
-                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 topics cursor-pointer">
-                            <div class="txt-amaranth txt-light-2 pl-2 pr-2 pt-1 pb-1 mr-3">●</div> Gaming
+                        <li class="mt-4 mb-4 d-flex vcenter font-w700 txt-grey txt-dark-5 topics cursor-pointer categories-and-topics" id="gaming">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-4">
+                                <circle cx="5" cy="5" r="4" fill="#EB86CF" stroke="white"/>
+                            </svg>
+                            Gaming
                         </li>
                     </ul>
                 </div>
             </div>
 
             <div class="col-xs2 rounded-3 p-5 mr-5">
-                <a href="/create-new-topic">
+                <a href="/create-new-topic" id="start-new-topic">
                     <p class="bg-primary txt-white txt-center mt-5 mb-5 ml-5 pt-3 pb-3 rounded-2 font-w700" id="new-topic">+ Start a new topic</p>
                 </a>
 
@@ -199,7 +243,11 @@
     <script src="https://cdn.jsdelivr.net/npm/axentix@1.3.0/dist/js/axentix.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/scripts/chevrons.js"></script>
-    <script src="/scripts/generate-posts.js" type="module"></script>
+    <script src="/scripts/filters.js" type="module"></script>
+    <script src="/scripts/hide-not-logged.js"></script>
+    <script src="/scripts/hide-logged.js"></script>
+    <script src="/scripts/categories-topics-selection.js"></script>
+    <script src="/scripts/generate-posts-by-category.js" type="module"></script>
 </body>
 
 </html>

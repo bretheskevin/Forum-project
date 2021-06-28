@@ -3,6 +3,7 @@ const categories = document.body.getElementsByClassName("categories");
 for (let category of categories) {
     category.addEventListener("click", () => {
         const id = category.getAttribute("id");
+
         document.getElementById("category").textContent = id;
 
         for (let categ of categories) {
