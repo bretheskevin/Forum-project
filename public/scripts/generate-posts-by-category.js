@@ -243,9 +243,16 @@ function addCommentsToFooter(footer) {
     footer.appendChild(comments);
 }
 
+const categoriesAndTopics = document.getElementsByClassName("categories-and-topics")
 
 async function main() {
-    const res = await fetch("/posts")
+    document.getElementById("posts-container").innerHTML = "";
+
+    let categoryFilter = document.getElementById("category").textContent + "-" + document.getElementById("topic").textContent;
+
+    console.log("/posts/" + categoryFilter)
+
+    const res = await fetch("/posts/" + categoryFilter)
     const postsList = await res.json();
     document.getElementById("nb-of-posts").textContent = postsList.length + " posts"
     for (let post of postsList.reverse()) {
@@ -257,3 +264,10 @@ async function main() {
 }
 
 main()
+
+for (let element of categoriesAndTopics) {
+    element.addEventListener("click", main)
+}
+
+
+
