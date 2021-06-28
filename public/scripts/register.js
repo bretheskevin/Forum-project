@@ -1,3 +1,7 @@
+if (document.cookie) {
+    window.location.href = "/feed";
+}
+
 let validEmail = false;
 let validUsername = false;
 let validPassword = false;
