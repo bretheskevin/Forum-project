@@ -1,3 +1,5 @@
+import {changeTopics} from "../generate-posts/change-topics.js";
+
 const postId = parseInt(window.location.href.split("?")[1].split("=")[1]);
 document.getElementById("post-id").textContent = "" + postId;
 const titleContent = document.getElementById("title");
@@ -41,6 +43,13 @@ titleContent.value = data["Title"];
 postContent.value = data["Content"];
 activeCategory(document.getElementById(category))
 document.getElementById("category").textContent = category;
+
+for (let category of document.getElementsByClassName("categories")) {
+    if (category.classList.contains("shadow-4")) {
+        changeTopics(category.getAttribute("id"), document.getElementsByClassName("topics"))
+    }
+}
+
 activeTopics(document.getElementById(topic));
 document.getElementById("topic").textContent = topic;
 

@@ -1,11 +1,20 @@
 import {generatePostsByCategory} from "../generate-posts/generate-posts-by-category.js";
+import {changeTopics} from "../generate-posts/change-topics.js";
 
 const categories = document.body.getElementsByClassName("categories");
 const topics = document.body.getElementsByClassName("topics");
 
 for (let category of categories) {
     category.addEventListener("click", async () => {
+        changeTopics(category.getAttribute("id"), topics)
         document.getElementById("category").textContent = category.getAttribute("id");
+        for (let topic of topics) {
+            if (topic.classList.contains("shadow-4")) {
+                document.getElementById("topic").textContent = topic.getAttribute("id");
+                break;
+            }
+        }
+
 
         for (let categ of categories) {
             categ.classList.remove("white");
@@ -55,4 +64,3 @@ for (let topic of topics) {
         }
     })
 }
-
